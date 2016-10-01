@@ -30,10 +30,10 @@ class CopyExtension extends AbstractExtension
     /**
      * Verify the configuration for this task.
      *
-     * @param  string $source_path
-     * @param  string $destination_path
+     * @param string $source_path
+     * @param string $destination_path
      *
-     * @return boolean
+     * @return bool
      */
     public static function verify($source_path, $destination_path)
     {
@@ -51,26 +51,26 @@ class CopyExtension extends AbstractExtension
     /**
      * Check the path, set the options and clean the path.
      *
-     * @param  string $path
+     * @param string $path
      *
      * @return array
      */
     public static function checkPath($source_path, $destination_path)
     {
         $options = [
-            'source' => [],
+            'source'      => [],
             'destination' => [],
         ];
 
-        $source_options = & $options['source'];
-        $destination_options = & $options['destination'];
+        $source_options = &$options['source'];
+        $destination_options = &$options['destination'];
 
         list($source_path, $source_options) = Elixir::parseOptions($source_path);
         list($destination_path, $destination_options) = Elixir::parseOptions($destination_path);
 
         if (($index = stripos($source_path, '*.')) !== false) {
-            array_set($source_options, 'filter', substr($source_path, $index+2));
-            $source_path = substr($source_path, 0, $index+1);
+            array_set($source_options, 'filter', substr($source_path, $index + 2));
+            $source_path = substr($source_path, 0, $index + 1);
         }
 
         if (substr($source_path, -2) == '**') {
@@ -91,10 +91,10 @@ class CopyExtension extends AbstractExtension
     /**
      * Run the task.
      *
-     * @param  string $source_path
-     * @param  string $destination_path
+     * @param string $source_path
+     * @param string $destination_path
      *
-     * @return boolean
+     * @return bool
      */
     public function run($source_path, $destination_path)
     {
@@ -113,10 +113,10 @@ class CopyExtension extends AbstractExtension
     /**
      * Process the task.
      *
-     * @param  string $source_path
-     * @param  string $destination_path
+     * @param string $source_path
+     * @param string $destination_path
      *
-     * @return boolean
+     * @return bool
      */
     private function process($source_path, $destination_path)
     {
@@ -124,7 +124,7 @@ class CopyExtension extends AbstractExtension
 
         switch ($method) {
 
-            /**
+            /*
              * Copying all files.
              */
             case self::COPY_ALL:
@@ -137,7 +137,7 @@ class CopyExtension extends AbstractExtension
                 if (substr($destination_path, -1) != '/') {
                     $destination_path .= '/';
                 }
-                
+
                 foreach ($paths as $path) {
                     $new_path = str_replace($source_path, $destination_path, $path);
                     if (array_has($options, 'destination.remove_extension_folder')) {
@@ -149,11 +149,11 @@ class CopyExtension extends AbstractExtension
 
                 break;
 
-            /**
+            /*
              * Copying files from the base of the provided directory.
              */
             case self::COPY_BASE:
-                $paths = array_filter(scandir($source_path), function($path) use ($source_path) {
+                $paths = array_filter(scandir($source_path), function ($path) use ($source_path) {
                     return is_file($source_path.$path);
                 });
                 $paths = Elixir::filterPaths($paths, array_get($options, 'source.filter', ''));
@@ -175,7 +175,7 @@ class CopyExtension extends AbstractExtension
                 }
                 break;
 
-            /**
+            /*
              * Copying a single file.
              */
             case self::COPY_FILE:
@@ -185,14 +185,15 @@ class CopyExtension extends AbstractExtension
                     $destination_path .= $source_basename;
                 }
 
-                $this->copyFile($source_path, $destination_path);                
+                $this->copyFile($source_path, $destination_path);
                 break;
 
-            /**
+            /*
              * Error understanding path.
              */
             case self::COPY_ERROR:
                 Elixir::console()->error($source_path);
+
                 return false;
                 break;
         }
@@ -200,29 +201,29 @@ class CopyExtension extends AbstractExtension
         if (Elixir::verbose()) {
             Elixir::console()->line('');
         }
+
         return true;
     }
 
     /**
      * Copy file.
      *
-     * @param  string $source_path
-     * @param  string $destination_path
+     * @param string $source_path
+     * @param string $destination_path
      *
      * @return void
      */
     private function copyFile($source_path, $destination_path)
     {
         if (Elixir::verbose()) {
-            Elixir::console()->line(sprintf(" - From: %s", str_replace(base_path(), '', $source_path)));
-            Elixir::console()->line(sprintf("   To:   %s", str_replace(base_path(), '', $destination_path)));
+            Elixir::console()->line(sprintf(' - From: %s', str_replace(base_path(), '', $source_path)));
+            Elixir::console()->line(sprintf('   To:   %s', str_replace(base_path(), '', $destination_path)));
             Elixir::console()->line('');
         }
 
         if (!Elixir::dryRun()) {
             $destination_dirname = dirname($destination_path);
             if (!file_exists($destination_dirname)) {
-
                 $existing_parent_path = $destination_dirname;
                 while (!file_exists($existing_parent_path)) {
                     $existing_parent_path = dirname($existing_parent_path);

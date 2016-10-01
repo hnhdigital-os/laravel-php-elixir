@@ -10,21 +10,23 @@ class EmptyExtension extends AbstractExtension
     /**
      * Verify the configuration for this task.
      *
-     * @param  integer $index
-     * @param  string $clear_path
+     * @param int    $index
+     * @param string $clear_path
      *
-     * @return boolean
+     * @return bool
      */
     public static function verify($index, $clear_path)
     {
         if (!($scan_path = Elixir::checkPath($clear_path))) {
             Elixir::console()->error(sprintf('Path \'%s\' does not exist.', $clear_path));
+
             return false;
         }
 
         // Ensure that this folder is contained so it doesn't remove the project.
         if (stripos($scan_path, public_path()) === false || $scan_path == public_path()) {
             Elixir::console()->error(sprintf('Clearing files from \'%s\' is unwise.', $scan_path));
+
             return false;
         }
 
@@ -34,10 +36,10 @@ class EmptyExtension extends AbstractExtension
     /**
      * Run the task.
      *
-     * @param  integer $index
-     * @param  string $clear_path
+     * @param int    $index
+     * @param string $clear_path
      *
-     * @return boolean
+     * @return bool
      */
     public function run($index, $clear_path)
     {
@@ -53,10 +55,10 @@ class EmptyExtension extends AbstractExtension
     /**
      * Process the task.
      *
-     * @param  integer $index
-     * @param  string $clear_path
+     * @param int    $index
+     * @param string $clear_path
      *
-     * @return boolean
+     * @return bool
      */
     private function process($index, $clear_path)
     {
@@ -67,7 +69,7 @@ class EmptyExtension extends AbstractExtension
 
         Elixir::console()->info(sprintf('   Found %s folders and files. Removing...', count($paths)));
         Elixir::console()->line('');
-        
+
         foreach ($paths as $path) {
             if (Elixir::verbose()) {
                 Elixir::console()->line(sprintf(' - Deleting %s...', str_replace(base_path(), '', $path)));

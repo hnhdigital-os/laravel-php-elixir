@@ -10,10 +10,10 @@ class RevisionExtension extends AbstractExtension
     /**
      * Verify the configuration for this task.
      *
-     * @param  string $source_path
-     * @param  array  $options
+     * @param string $source_path
+     * @param array  $options
      *
-     * @return boolean
+     * @return bool
      */
     public static function verify($source_path, $options)
     {
@@ -38,16 +38,17 @@ class RevisionExtension extends AbstractExtension
         if (!Elixir::checkPath($options[0])) {
             return false;
         }
+
         return true;
     }
 
     /**
      * Run the task.
      *
-     * @param  string $source_path
-     * @param  array  $options
+     * @param string $source_path
+     * @param array  $options
      *
-     * @return boolean
+     * @return bool
      */
     public function run($source_path, $options)
     {
@@ -73,10 +74,10 @@ class RevisionExtension extends AbstractExtension
     /**
      * Process the task.
      *
-     * @param  string $source_path
-     * @param  array  $options
+     * @param string $source_path
+     * @param array  $options
      *
-     * @return boolean
+     * @return bool
      */
     private function process($source_path, $desination_folder, $manifest_file, $text_options)
     {
@@ -88,7 +89,7 @@ class RevisionExtension extends AbstractExtension
         if (!isset($options['hash_length'])) {
             $options['hash_length'] = 8;
         }
-        
+
         $manifest = [];
 
         if (Elixir::verbose()) {
@@ -145,8 +146,8 @@ class RevisionExtension extends AbstractExtension
             $manifest[$manifest_source] = $manifest_rev;
 
             if (Elixir::verbose()) {
-                Elixir::console()->line(sprintf(" - From: %s", $manifest_rev));
-                Elixir::console()->line(sprintf("   To:   %s", $manifest_source));
+                Elixir::console()->line(sprintf(' - From: %s', $manifest_rev));
+                Elixir::console()->line(sprintf('   To:   %s', $manifest_source));
                 Elixir::console()->line('');
             }
         }
@@ -157,10 +158,11 @@ class RevisionExtension extends AbstractExtension
             $manifest = preg_replace('~","~', "\",\n\"", $manifest);
             $manifest = preg_replace('~^\{~', "{\n", $manifest);
             $manifest = preg_replace('~\}$~', "\n}", $manifest);
-            $manifest = preg_replace('~^\"~m', "  \"", $manifest);
+            $manifest = preg_replace('~^\"~m', '  "', $manifest);
             $manifest = str_replace('":"', '": "', $manifest);
             file_put_contents($manifest_file, $manifest);
         }
+
         return true;
     }
 }
