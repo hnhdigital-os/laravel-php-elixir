@@ -10,10 +10,10 @@ class ReplaceExtension extends AbstractExtension
     /**
      * Verify the configuration for this task.
      *
-     * @param  string $source_path
-     * @param  array  $find_replace
+     * @param string $source_path
+     * @param array  $find_replace
      *
-     * @return boolean
+     * @return bool
      */
     public static function verify($source_path, $find_replace)
     {
@@ -29,10 +29,10 @@ class ReplaceExtension extends AbstractExtension
     /**
      * Run the task.
      *
-     * @param  string $source_path
-     * @param  array  $find_replace
+     * @param string $source_path
+     * @param array  $find_replace
      *
-     * @return boolean
+     * @return bool
      */
     public function run($source_path, $find_replace)
     {
@@ -54,10 +54,10 @@ class ReplaceExtension extends AbstractExtension
     /**
      * Process the task.
      *
-     * @param  string $source_path
-     * @param  array  $find_replace
+     * @param string $source_path
+     * @param array  $find_replace
      *
-     * @return boolean
+     * @return bool
      */
     private function process($source_path, $find_replace)
     {
@@ -84,7 +84,7 @@ class ReplaceExtension extends AbstractExtension
         if (is_file($source_path)) {
             return $this->findReplace($find, $replace, $source_path, $options);
         } else {
-            $paths = Elixir::scan($source_path, false);            
+            $paths = Elixir::scan($source_path, false);
             $paths = Elixir::filterPaths($paths, array_get($options, 'filter', ''));
 
             foreach ($paths as $source_path) {
@@ -93,6 +93,7 @@ class ReplaceExtension extends AbstractExtension
                 Elixir::console()->line('');
             }
         }
+
         return true;
     }
 
@@ -132,7 +133,6 @@ class ReplaceExtension extends AbstractExtension
 
             // When doing a dry-run with verbose - we use PCRE to do a string count on what would be replaced.
             elseif (Elixir::verbose()) {
-
                 $matches = [];
                 if (array_has($options, 'preg')) {
                     $find = preg_quote($find);
@@ -140,12 +140,14 @@ class ReplaceExtension extends AbstractExtension
                 preg_match_all('~'.$find.'~', $content, $matches);
                 if (isset($matches[0])) {
                     Elixir::console()->info(sprintf('   Found %s matches for %s.', count($matches[0]), $original_find));
-                } else {                    
+                } else {
                     Elixir::console()->line(sprintf('   Found no matches for %s', $original_find));
                 }
             }
+
             return true;
         }
+
         return false;
     }
 }

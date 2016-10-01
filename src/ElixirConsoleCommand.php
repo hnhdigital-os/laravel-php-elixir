@@ -4,8 +4,8 @@ namespace PhpElixir;
 
 use Config;
 use Illuminate\Console\Command;
-use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Yaml\Exception\ParseException;
+use Symfony\Component\Yaml\Yaml;
 
 class ElixirConsoleCommand extends Command
 {
@@ -76,7 +76,7 @@ class ElixirConsoleCommand extends Command
         foreach ($this->tasks as $task_detail) {
             $task_class = $task_detail['class'];
             $arguments = $task_detail['arguments'];
-            (new $task_class)->run(...$arguments);
+            (new $task_class())->run(...$arguments);
         }
 
         static::commandInfo('Done.');
@@ -111,7 +111,7 @@ class ElixirConsoleCommand extends Command
     /**
      * Verify and setup configuration so we can run this command.
      *
-     * @return boolean
+     * @return bool
      */
     private function verify()
     {
@@ -157,7 +157,6 @@ class ElixirConsoleCommand extends Command
 
         // The config file declares 3rd party extensions.
         if (isset($config['extensions'])) {
-
         }
         unset($config['extensions']);
 
@@ -175,7 +174,7 @@ class ElixirConsoleCommand extends Command
             }
 
             // Create the class name and check.
-            $task_class = __NAMESPACE__ . '\\Extensions\\' . studly_case($task).'Extension';
+            $task_class = __NAMESPACE__.'\\Extensions\\'.studly_case($task).'Extension';
             if (!class_exists($task_class)) {
                 $this->error(sprintf('Extension \'%s\' can not be found.', $task));
 
@@ -191,13 +190,14 @@ class ElixirConsoleCommand extends Command
                 $this->tasks[] = ['class' => $task_class, 'arguments' => [$key, $settings]];
             }
         }
+
         return true;
     }
 
     /**
      * Parse paths that exist in values.
      *
-     * @param  mixed $value
+     * @param mixed $value
      *
      * @return mixed
      */
@@ -211,33 +211,34 @@ class ElixirConsoleCommand extends Command
             $value = str_replace(array_keys($this->paths), array_values($this->paths), $value);
             $value = str_replace([' + ', '+', '"', "'"], '', $value);
         }
+
         return $value;
     }
 
     /**
      * Dry run only.
      *
-     * @return boolean
+     * @return bool
      */
     public static function dryRun()
     {
-        return (isset(static::console()->options['dry-run']) && static::console()->options['dry-run'] == true);
+        return isset(static::console()->options['dry-run']) && static::console()->options['dry-run'] == true;
     }
 
     /**
      * Verbose is on.
      *
-     * @return boolean
+     * @return bool
      */
     public static function verbose()
     {
-        return (isset(static::console()->options['verbose']) && static::console()->options['verbose'] == true);
+        return isset(static::console()->options['verbose']) && static::console()->options['verbose'] == true;
     }
 
     /**
      * Store paths by allow check path confirmation.
      *
-     * @return boolean
+     * @return bool
      */
     public static function storePath($path)
     {
@@ -245,7 +246,7 @@ class ElixirConsoleCommand extends Command
         if (count($paths) >= 2) {
             foreach ($paths as $path) {
                 self::storePath($path);
-            }            
+            }
         } else {
             static::console()->path_check[$path] = true;
         }
@@ -254,10 +255,10 @@ class ElixirConsoleCommand extends Command
     /**
      * Check and return path.
      *
-     * @param  string  $original_path
-     * @param  boolean $create_folder
+     * @param string $original_path
+     * @param bool   $create_folder
      *
-     * @return string|boolean
+     * @return string|bool
      */
     public static function checkPath($original_path, $create_folder = false, $only_check = false)
     {
@@ -286,9 +287,11 @@ class ElixirConsoleCommand extends Command
             }
 
             mkdir($path, fileperms($existing_parent_path), true);
+
             return $path;
         }
         static::console()->error(sprintf('Path %s can not be found.', $original_path));
+
         return false;
     }
 
@@ -310,9 +313,9 @@ class ElixirConsoleCommand extends Command
 
     /**
      * Scan recursively through each folder for all files and folders.
-     * 
-     * @param  string  $scan_path
-     * @param  boolean $include_folders
+     *
+     * @param string $scan_path
+     * @param bool   $include_folders
      *
      * @return void
      */
@@ -355,8 +358,9 @@ class ElixirConsoleCommand extends Command
         }
 
         if (is_array($filter) && count($filter)) {
-            $paths = array_filter($paths, function($path) use ($filter) {
+            $paths = array_filter($paths, function ($path) use ($filter) {
                 $extension = pathinfo($path, PATHINFO_EXTENSION);
+
                 return in_array($extension, $filter);
             });
         }

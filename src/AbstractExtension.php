@@ -7,9 +7,10 @@ abstract class AbstractExtension
     /**
      * Verify the configuration for this task.
      *
-     * @param  string $key
-     * @param  mixed $settings
-     * @return boolean
+     * @param string $key
+     * @param mixed  $settings
+     *
+     * @return bool
      */
     public static function verify($key, $settings)
     {
@@ -19,9 +20,10 @@ abstract class AbstractExtension
     /**
      * Run the task.
      *
-     * @param  string $key
-     * @param  mixed $settings
-     * @return boolean
+     * @param string $key
+     * @param mixed  $settings
+     *
+     * @return bool
      */
     public function run($key, $settings)
     {

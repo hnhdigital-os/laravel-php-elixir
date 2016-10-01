@@ -2,19 +2,19 @@
 
 namespace PhpElixir\Extensions;
 
+use Leafo\ScssPhp\Compiler;
 use PhpElixir\AbstractExtension;
 use PhpElixir\ElixirConsoleCommand as Elixir;
-use Leafo\ScssPhp\Compiler;
 
 class SassExtension extends AbstractExtension
 {
     /**
      * Verify the configuration for this task.
      *
-     * @param  string $source_path
-     * @param  mixed $destination_path
+     * @param string $source_path
+     * @param mixed  $destination_path
      *
-     * @return boolean
+     * @return bool
      */
     public static function verify($source_path, $destination_path)
     {
@@ -27,16 +27,17 @@ class SassExtension extends AbstractExtension
         if (is_array($destination_path)) {
             return false;
         }
+
         return true;
     }
 
     /**
      * Run the task.
      *
-     * @param  string $source_path
-     * @param  string $destination_path
+     * @param string $source_path
+     * @param string $destination_path
      *
-     * @return boolean
+     * @return bool
      */
     public function run($source_path, $destination_path)
     {
@@ -55,10 +56,10 @@ class SassExtension extends AbstractExtension
     /**
      * Process the task.
      *
-     * @param  string $source_path
-     * @param  string $destination_path
+     * @param string $source_path
+     * @param string $destination_path
      *
-     * @return boolean
+     * @return bool
      */
     private function process($source_path, $destination_path)
     {
@@ -72,6 +73,7 @@ class SassExtension extends AbstractExtension
             Elixir::checkPath(dirname($destination_path), true);
             file_put_contents($destination_path, $compiled_scss);
         }
+
         return true;
     }
 }
