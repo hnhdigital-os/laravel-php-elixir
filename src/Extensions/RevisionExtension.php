@@ -154,13 +154,24 @@ class RevisionExtension extends AbstractExtension
 
         // Make it human viewable.
         if (!Elixir::dryRun()) {
-            $manifest = json_encode($manifest, JSON_UNESCAPED_SLASHES);
-            $manifest = preg_replace('~","~', "\",\n\"", $manifest);
-            $manifest = preg_replace('~^\{~', "{\n", $manifest);
-            $manifest = preg_replace('~\}$~', "\n}", $manifest);
-            $manifest = preg_replace('~^\"~m', '  "', $manifest);
-            $manifest = str_replace('":"', '": "', $manifest);
-            file_put_contents($manifest_file, $manifest);
+            $json_manifest = json_encode($manifest, JSON_UNESCAPED_SLASHES);
+            $json_manifest = preg_replace('~","~', "\",\n\"", $json_manifest);
+            $json_manifest = preg_replace('~^\{~', "{\n", $json_manifest);
+            $json_manifest = preg_replace('~\}$~', "\n}", $json_manifest);
+            $json_manifest = preg_replace('~^\"~m', '  "', $json_manifest);
+            $json_manifest = str_replace('":"', '": "', $json_manifest);
+            file_put_contents($manifest_file, $json_manifest);
+
+            if (array_has($options, 'config')) {
+                $php_manifest_file = config_path() . '/' . basename($manifest_file, '.json') . '.php';
+                $php_manifest = "<?php\n\n";
+                $php_manifest .= "return [\n";
+                foreach ($manifest as $asset_path => $build_path) {
+                    $php_manifest .= sprintf("    \"%s\" => \"%s\",\n", $asset_path, $build_path);
+                }
+                $php_manifest .= "];\n";
+                file_put_contents($php_manifest_file, $php_manifest);
+            }
         }
 
         return true;
