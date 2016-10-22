@@ -1,0 +1,22 @@
+
+options:
+
+paths:
+    PATH_SASS: resources/assets/sass
+    PATH_BOWER: bower_components
+    PATH_PUBLIC_ASSETS: public/assets
+    PATH_PUBLIC_BUILD: public/build
+    PATH_RES_VIEWS: resources/views
+
+empty:
+    - PATH_PUBLIC_ASSETS
+    - PATH_PUBLIC_BUILD
+
+sass:
+    PATH_SASS + /bootstrap.scss: PATH_PUBLIC_ASSETS + /vendor/bootstrap/styles.css
+
+revision:
+    PATH_PUBLIC_ASSETS:
+        - PATH_PUBLIC_BUILD
+        - PATH_PUBLIC_BUILD + /rev-manifest.json
+        - hash_length=8&minify=true&config=true

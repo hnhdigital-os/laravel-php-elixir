@@ -17,6 +17,13 @@ class ElixirConsoleCommand extends Command
     private static $console;
 
     /**
+     * YML file name for options.
+     *
+     * @var array
+     */
+    private $yml_options = '.elixir.yml';
+
+    /**
      * Parsed options.
      *
      * @var array
@@ -71,7 +78,7 @@ class ElixirConsoleCommand extends Command
             return 1;
         }
 
-        static::commandInfo('Using yaml file %s.', base_path('elixir.yml'));
+        static::commandInfo('Using yaml file %s.', base_path() . $this->yml_options);
 
         foreach ($this->tasks as $task_detail) {
             $task_class = $task_detail['class'];
@@ -122,17 +129,20 @@ class ElixirConsoleCommand extends Command
         }
 
         // Check YAML config file exists.
-        if (!file_exists(base_path('elixir.yml'))) {
+        if (!file_exists(base_path() . $this->yml_options)) {
             $this->error('Required elixir.yml file is missing.');
+            $this->info('We have copied the example file for you.');
+            $this->line('Please edit and re-run this command.');
+            copy(__DIR__.'/.elixir.yml.example', base_path() . '.elixir.yml');
 
             return false;
         }
 
         // Parse the YAML config file.
         try {
-            $config = Yaml::parse(file_get_contents(base_path('elixir.yml')));
+            $config = Yaml::parse(file_get_contents(base_path() . $this->yml_options));
         } catch (ParseException $e) {
-            $this->error(sprintf('Unable to parse elixir.yml: %s', $e->getMessage()));
+            $this->error(sprintf('Unable to parse .elixir.yml: %s', $e->getMessage()));
 
             return false;
         }
