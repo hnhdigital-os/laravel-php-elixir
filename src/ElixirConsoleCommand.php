@@ -302,7 +302,7 @@ class ElixirConsoleCommand extends Command
      */
     public static function parseOptions($input)
     {
-        $input_array = explode('|', $input);
+        $input_array = explode('?', $input);
         $string = $input_array[0];
         $string_options = !empty($input_array[1]) ? $input_array[1] : '';
         $options = [];
