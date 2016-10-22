@@ -3,17 +3,15 @@ options:
 
 paths:
     PATH_SASS: resources/assets/sass
-    PATH_BOWER: bower_components
     PATH_PUBLIC_ASSETS: public/assets
     PATH_PUBLIC_BUILD: public/build
-    PATH_RES_VIEWS: resources/views
 
 empty:
     - PATH_PUBLIC_ASSETS
     - PATH_PUBLIC_BUILD
 
 sass:
-    PATH_SASS + /bootstrap.scss: PATH_PUBLIC_ASSETS + /vendor/bootstrap/styles.css
+    PATH_SASS + /app.scss: PATH_PUBLIC_ASSETS + /vendor/app.css
 
 revision:
     PATH_PUBLIC_ASSETS:
