@@ -63,6 +63,12 @@ class ElixirWatchCommand extends Command
             return 1;
         }
 
+        if (!function_exists('inotify_init')) {
+            static::console()->error('You need to install PECL inotify to be able to use elixir:watch.');
+
+            return 1;
+        }
+
         // Initialize an inotify instance.
         $this->watcher = inotify_init();
 
