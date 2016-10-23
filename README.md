@@ -23,13 +23,6 @@ Tasks are sequentially run in the order that they are declared in the configurat
 * Less - compile less css files.
 * Webpack - process JS files.
 
-## Watcher
-
-You can run a watcher on any number of files and folders to automatically run elixir on changes.
-
-You can list these files or folders in the config section 'watch'. 
-
-Run 'php artisan elixir:watch' to start up the watcher. It provides some verbose when a path watcher is added or removed, and when the standard elixir task is run.
 
 ## Installation
 
@@ -53,6 +46,24 @@ Add it to your available console commands in app/Console/Kernel.php:
 ```
 
 Run  'php artisan elixir' to copy the default config file which will copy to your base folder as '.elixir.yml'.
+
+## Execute tasks
+
+Tasks listed in the default config file can be executed by running 'php artisan elixir'.
+
+A different config file can be loaded by specifying it in an optional argument, 'php artisan elixir --config=mytasks.yml'.
+
+## Watch for changes
+
+You can run a watcher on any number of files and folders to automatically run elixir on changes.
+
+You can list these files or folders in the default config file using the task module 'watch'. 
+
+Run 'php artisan elixir:watch' to start up the watcher.
+
+Elixir:watch also takes an optional argument to specifiy an alternative config file.
+
+It provides some verbose when a path watcher is added or removed, and when the standard elixir task is run.
 
 ## Configuration
 
