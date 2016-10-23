@@ -17,4 +17,4 @@ revision:
     PATH_PUBLIC_ASSETS:
         - PATH_PUBLIC_BUILD
         - PATH_PUBLIC_BUILD + /rev-manifest.json
-        - hash_length=8&minify=true&config=true
+        - minify=true&php_manifest=true

@@ -162,7 +162,7 @@ class RevisionExtension extends AbstractExtension
             $json_manifest = str_replace('":"', '": "', $json_manifest);
             file_put_contents($manifest_file, $json_manifest);
 
-            if (array_has($options, 'config')) {
+            if (array_has($options, 'php_manifest')) {
                 $php_manifest_file = config_path() . '/' . basename($manifest_file, '.json') . '.php';
                 $php_manifest = "<?php\n\n";
                 $php_manifest .= "return [\n";
