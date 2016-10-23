@@ -8,7 +8,6 @@ use Symfony\Component\Yaml\Yaml;
 
 trait SharedTrait
 {
-
     /**
      * Static reference to this running command.
      *
@@ -49,18 +48,18 @@ trait SharedTrait
         }
 
         // Check YAML config file exists.
-        if (!file_exists(base_path() . '/' . $this->yml_options)) {
+        if (!file_exists(base_path().'/'.$this->yml_options)) {
             $this->error('Required elixir.yml file is missing.');
             $this->info('We have copied the example file for you.');
             $this->line('Please edit and re-run this command.');
-            copy(__DIR__.'/.elixir.yml.example', base_path() . '/' . '.elixir.yml');
+            copy(__DIR__.'/.elixir.yml.example', base_path().'/'.'.elixir.yml');
 
             return false;
         }
 
         // Parse the YAML config file.
         try {
-            $config = Yaml::parse(file_get_contents(base_path() . '/' . $this->yml_options));
+            $config = Yaml::parse(file_get_contents(base_path().'/'.$this->yml_options));
         } catch (ParseException $e) {
             $this->error(sprintf('Unable to parse .elixir.yml: %s', $e->getMessage()));
 

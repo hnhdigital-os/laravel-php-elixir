@@ -61,7 +61,7 @@ class ElixirConsoleCommand extends Command
             return 1;
         }
 
-        static::commandInfo('Using yaml file %s.', base_path() . $this->yml_options);
+        static::commandInfo('Using yaml file %s.', base_path().$this->yml_options);
 
         foreach ($this->tasks as $task_detail) {
             $task_class = $task_detail['class'];
