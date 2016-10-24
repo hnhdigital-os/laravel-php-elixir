@@ -222,15 +222,7 @@ class CopyExtension extends AbstractExtension
         }
 
         if (!Elixir::dryRun()) {
-            $destination_dirname = dirname($destination_path);
-            if (!file_exists($destination_dirname)) {
-                $existing_parent_path = $destination_dirname;
-                while (!file_exists($existing_parent_path)) {
-                    $existing_parent_path = dirname($existing_parent_path);
-                }
-
-                mkdir($destination_dirname, fileperms($existing_parent_path), true);
-            }
+            Elixir::makeDir($destination_path);
             copy($source_path, $destination_path);
         }
     }

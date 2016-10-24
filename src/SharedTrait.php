@@ -324,4 +324,24 @@ trait SharedTrait
         array_unshift($arguments, date('H:i:s'));
         static::console()->info(sprintf($template, ...$arguments));
     }
+
+    /**
+     * Make a directories using the provided path.
+     *
+     * @param string $path
+     *
+     * @return void
+     */
+    public static function makeDir($path)
+    {
+        $path = dirname($path);
+        if (!file_exists($path)) {
+            $existing_parent_path = $path;
+            while (!file_exists($existing_parent_path)) {
+                $existing_parent_path = dirname($existing_parent_path);
+            }
+
+            mkdir($path, fileperms($existing_parent_path), true);
+        }
+    }
 }
