@@ -18,6 +18,12 @@ Each task is configured differently, and provide extended option input such as f
 * SASS - process and compile a scss file.
 * Revision - revision files and store in a rev-manifest.json file.
 
+## Tasks for future releases
+
+* Combine - combine a number of files into a single file.
+* Exec - execute an external shell command.
+* Less - compile less css files.
+
 ## Watcher
 
 You can run a watcher on any number of files and folders to automatically run elixir on changes.
