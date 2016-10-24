@@ -8,7 +8,7 @@ Provides a replacement of the Node.js based elixir pre-packaged with Laravel Fra
 
 Tasks are sequentially run in the order that they are declared. You can run a task more than once for different outcomes.
 
-Each task is configured differently, and provide extended option input such as file filtering in a copy task.
+Each task is configured differently and the required configuration and, if applicable, extended option that can be used an be found below.
 
 ## Available tasks
 
