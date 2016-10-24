@@ -180,3 +180,7 @@ revision:
         - PATH_PUBLIC_BUILD + /rev-manifest.json
         - hash_length=12&minify=true&php_manifest=true
 ```
+
+## License
+
+The Laravel PHP-Elixir is open-sourced software licensed under the MIT license.

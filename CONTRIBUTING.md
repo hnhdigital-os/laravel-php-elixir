@@ -1,25 +1,45 @@
-Contributing
-============
+# Contributing to Laravel PHP-Elixir
 
-First off - **you rock!**, thanks you so much for taking to time and energy to make this project better!
+## Coding Style
 
-A healthy community is filled with different coders with differnt coding styles. This can cause cognative friction. 
-Here are a few rules to follow in order to minimize that friction and ease code reviews and discussions before 
-maintainers accept and merge your work.
+PHP-Elixir follows the [PSR-2](http://www.php-fig.org/psr/2/) coding standard and the [PSR-4](http://www.php-fig.org/psr/4/) autoloading standard.
 
-You MUST follow the [PSR-1](http://www.php-fig.org/psr/1/) and [PSR-2](http://www.php-fig.org/psr/2/). All commits are checked using [StyleCI](https://styleci.io).
+## PHPDoc
 
-Additionally you:
+Below is an example of a valid Laravel documentation block. Note that the @param attribute is followed by two spaces, the argument type, two more spaces, and finally the variable name:
+
+```php
+/**
+ * Register a binding with the container.
+ *
+ * @param  string|array  $abstract
+ * @param  \Closure|string|null  $concrete
+ * @param  bool  $shared
+ * @return void
+ */
+public function bind($abstract, $concrete = null, $shared = false)
+{
+    //
+}
+```
+
+## StyleCI
+
+Don't worry if your code styling isn't perfect! [StyleCI](https://styleci.io) will automatically merge any style fixes into the Laravel repository after pull requests are merged. This allows us to focus on the content of the contribution and not the code style.
+
+## Testing
 
 * MUST run the test suite.
 * MUST write (or update) unit tests.
 * SHOULD write documentation.
 
+## Commits
+
 Please, write [commit messages that make sense](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html),
 and [rebase your branch](http://git-scm.com/book/en/Git-Branching-Rebasing) before submitting your Pull Request.
+
+First off - **you rock!**, thanks you so much for taking to time and energy to make this project better!
 
 You may be asked to [squash your commits](http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html)
 too. This is used to "clean" your Pull Request before merging it (we don't want commits such as `fix tests`, `fix 2`,
 `fix 3`, etc).
-
-Let's do this!
