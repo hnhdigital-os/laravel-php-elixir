@@ -223,13 +223,7 @@ trait SharedTrait
         }
         if ($create_folder) {
             $path = base_path().'/'.str_replace(base_path(), '', $path);
-
-            $existing_parent_path = $path;
-            while (!file_exists($existing_parent_path)) {
-                $existing_parent_path = dirname($existing_parent_path);
-            }
-
-            mkdir($path, fileperms($existing_parent_path), true);
+            self::makeDir($path);
 
             return $path;
         }
