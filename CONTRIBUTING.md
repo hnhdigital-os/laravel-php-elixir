@@ -6,18 +6,17 @@ PHP-Elixir follows the [PSR-2](http://www.php-fig.org/psr/2/) coding standard an
 
 ## PHPDoc
 
-Below is an example of a valid Laravel documentation block. Note that the @param attribute is followed by two spaces, the argument type, two more spaces, and finally the variable name:
-
 ```php
 /**
- * Register a binding with the container.
+ * Some function.
  *
- * @param  string|array  $abstract
- * @param  \Closure|string|null  $concrete
- * @param  bool  $shared
+ * @param  string|array         $first_paramater
+ * @param  \Closure|string|null $second_paramater
+ * @param  bool                 $third_paramater
+ *
  * @return void
  */
-public function bind($abstract, $concrete = null, $shared = false)
+public function myFunction($first_paramater, $second_paramater = null, $third_paramater = false)
 {
     //
 }
