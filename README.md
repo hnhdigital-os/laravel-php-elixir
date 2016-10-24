@@ -160,10 +160,12 @@ Options that are available:
 * minify - default is false.
 * php_manifest - generates a php equivalent of the json revision file.
 
+```
 {SOURCE_FOLDER}:
     - {DESTINATION_FOLDER}
     - {REVISION_MANIFEST_FILE}
     - {QUERY_STRING_OPTIONS}
+```
 
 ```yaml
 revision:
