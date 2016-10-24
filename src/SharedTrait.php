@@ -326,7 +326,7 @@ trait SharedTrait
     }
 
     /**
-     * Make a directories using the provided path.
+     * Make directories using the provided path.
      *
      * @param string $path
      *
