@@ -163,7 +163,7 @@ class RevisionExtension extends AbstractExtension
             file_put_contents($manifest_file, $json_manifest);
 
             if (array_has($options, 'config')) {
-                $php_manifest_file = config_path() . '/' . basename($manifest_file, '.json') . '.php';
+                $php_manifest_file = config_path().'/'.basename($manifest_file, '.json').'.php';
                 $php_manifest = "<?php\n\n";
                 $php_manifest .= "return [\n";
                 foreach ($manifest as $asset_path => $build_path) {

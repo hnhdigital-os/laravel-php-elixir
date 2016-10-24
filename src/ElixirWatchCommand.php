@@ -4,7 +4,6 @@ namespace PhpElixir;
 
 use Config;
 use Illuminate\Console\Command;
-use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
 class ElixirWatchCommand extends Command
@@ -58,7 +57,7 @@ class ElixirWatchCommand extends Command
             return 1;
         }
 
-        static::commandInfo('Using yaml file %s.', base_path() . '/' . $this->yml_options);
+        static::commandInfo('Using yaml file %s.', base_path().'/'.$this->yml_options);
         static::console()->line('');
 
         // Initialize an inotify instance.
@@ -84,10 +83,10 @@ class ElixirWatchCommand extends Command
                     $is_dir = false;
 
                     // Directory events have a different hex, convert to the same number for a file event.
-                    $hex = (string)dechex($event_detail['mask']);
+                    $hex = (string) dechex($event_detail['mask']);
                     if (substr($hex, 0, 1) == '4') {
                         $hex[0] = '0';
-                        $event_detail['mask'] = hexdec((int)$hex);
+                        $event_detail['mask'] = hexdec((int) $hex);
                         $is_dir = true;
                     }
 
@@ -99,7 +98,7 @@ class ElixirWatchCommand extends Command
                     // This event refers to a path that exists.
                     elseif (isset($this->track_watches[$event_detail['wd']])) {
                         // File or folder path
-                        $file_path = $this->track_watches[$event_detail['wd']] . '/' .$event_detail['name'];
+                        $file_path = $this->track_watches[$event_detail['wd']].'/'.$event_detail['name'];
 
                         if ($is_dir) {
                             switch ($event_detail['mask']) {
@@ -154,7 +153,7 @@ class ElixirWatchCommand extends Command
      */
     private function addPath($path)
     {
-        static::console()->line('   Watching ' . $path);
+        static::console()->line('   Watching '.$path);
 
         // Watch this folder.
         $watch_id = inotify_add_watch($this->watcher, $path, $this->watch_constants);
@@ -175,7 +174,7 @@ class ElixirWatchCommand extends Command
     /**
      * Remove path from watching.
      *
-     * @param  string $file_path
+     * @param string $file_path
      *
      * @return void
      */
@@ -186,7 +185,7 @@ class ElixirWatchCommand extends Command
 
         // Remove the watch for this folder and remove from our tracking array.
         if ($watch_id !== false && isset($this->track_watches[$watch_id])) {
-            static::console()->line('   Removing watch for ' . $this->track_watches[$watch_id]);        
+            static::console()->line('   Removing watch for '.$this->track_watches[$watch_id]);
             try {
                 inotify_rm_watch($this->watcher, $watch_id);
             } catch (\Exception $exception) {
