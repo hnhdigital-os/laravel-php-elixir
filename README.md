@@ -10,7 +10,7 @@ Install via composer:
 
 Add it to your available console commands in app/Console/Kernel.php:
 
-`
+```php
     /**
      * The Artisan commands provided by your application.
      *
@@ -21,7 +21,7 @@ Add it to your available console commands in app/Console/Kernel.php:
       \PhpElixir\ElixirConsoleCommand::class,
       \PhpElixir\ElixirWatchCommand::class,
 ];
-`
+```
 
 Run `php artisan elixir' to copy the default config file which will copy to your base folder as '.elixir.yml'.
 
