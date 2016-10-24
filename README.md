@@ -30,7 +30,7 @@ You can run a watcher on any number of files and folders to automatically run el
 
 You can list these files or folders in the config section 'watch'. 
 
-You do this by running 'php artisan elixir:watch'.
+Run 'php artisan elixir:watch' to start up the watcher. It providers some verbose when a path watcher is added or removed, and when the standard elixir task is run.
 
 ## Installation
 
