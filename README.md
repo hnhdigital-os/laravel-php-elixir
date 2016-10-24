@@ -1,6 +1,6 @@
 # Laravel PHP-Elixir
 
-[![Build Status](https://travis-ci.org/bluora/laravel-php-elixir.svg?branch=master)](https://travis-ci.org/bluora/laravel-php-elixir)
+[![StyleCI](https://styleci.io/repos/69619219/shield?branch=master)](https://styleci.io/repos/69619219) [![Build Status](https://travis-ci.org/bluora/laravel-php-elixir.svg?branch=master)](https://travis-ci.org/bluora/laravel-php-elixir)
 
 Adds a replacement of the node.js based elixir pre-packaged with Laravel Framework.
 
