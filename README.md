@@ -6,11 +6,9 @@
 
 Provides a replacement of the Node.js based elixir pre-packaged with Laravel Framework.
 
-Tasks are sequentially run in the order that they are declared. You can run a task more than once for different outcomes.
+Tasks are sequentially run in the order that they are declared in the configuration file. You can specify more than one task module block.
 
-Each task is configured differently and the required configuration and, if applicable, extended option that can be used an be found below.
-
-## Available tasks
+## Available task modules
 
 * Empty - removes all files and folders in the directory.
 * Copy - copy a file or files (current directory or all files in directory).
@@ -18,7 +16,7 @@ Each task is configured differently and the required configuration and, if appli
 * SASS - process and compile a scss file.
 * Revision - revision files and store in a rev-manifest.json file.
 
-## Tasks for future releases
+## Task modules for future releases
 
 * Combine - combine a number of files into a single file.
 * Exec - execute an external shell command.
@@ -59,7 +57,7 @@ Run  'php artisan elixir' to copy the default config file which will copy to you
 
 Configuration for this package is done in the '.elixir.yml' located in your base directory or in the 'vendor/bluora/laravel-php-elixir/src/.elixir.yml.example'.
 
-You can list tasks using the first level in the YAML file or, if you need to declare more than one in different locations of the config file, simply prepend the task with a number (unique to the task) and a hash.
+You can list tasks using the first level in the YAML file or, if you need to declare more than one task module in different location of the config file, simply prepend the task with a number (unique to the task) and a hash.
 
 ```yaml
 copy:
