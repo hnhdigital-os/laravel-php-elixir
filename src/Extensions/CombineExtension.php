@@ -28,7 +28,7 @@ class CombineExtension extends AbstractExtension
                 $path = substr($path, 0, -1);
             }
 
-            // Check that this path exists.s
+            // Check that this path exists.
             if (!Elixir::checkPath($path, false, true)) {
                 return false;
             }
