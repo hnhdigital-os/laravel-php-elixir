@@ -98,6 +98,9 @@ class CombineExtension extends AbstractExtension
 
             foreach ($file_paths as $file_path) {
                 if (file_exists($file_path)) {
+                    if (Elixir::verbose()) {
+                        Elixir::console()->line(sprintf('   Adding:   %s', str_replace(base_path(), '', $file_path)));
+                    }
                     $relative_path = str_replace(base_path(), '', $file_path);
                     $contents .= sprintf("\n/* %s */\n\n", $relative_path);
                     $contents .= file_get_contents($file_path);
@@ -107,6 +110,13 @@ class CombineExtension extends AbstractExtension
 
         // Put the contents into the new file.
         Elixir::makeDir($destination_path);
-        file_put_contents($destination_path, $contents);
+         if (Elixir::verbose()) {
+            Elixir::console()->line(sprintf('   Created:   %s', str_replace(base_path(), '', $destination_path)));
+            Elixir::console()->line('');
+        }
+
+        if (!Elixir::dryRun()) {
+            file_put_contents($destination_path, $contents);
+        }
     }
 }
