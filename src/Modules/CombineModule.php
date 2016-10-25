@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpElixir\Extensions;
+namespace PhpElixir\Modules;
 
-use PhpElixir\AbstractExtension;
+use PhpElixir\AbstractModule;
 use PhpElixir\ElixirConsoleCommand as Elixir;
 
-class CombineExtension extends AbstractExtension
+class CombineModule extends AbstractModule
 {
     /**
      * Verify the configuration for this task.
@@ -47,7 +47,7 @@ class CombineExtension extends AbstractExtension
      */
     public function run($destination_path, $source_paths)
     {
-        Elixir::commandInfo('Executing \'combine\' extension...');
+        Elixir::commandInfo('Executing \'combine\' module...');
         Elixir::console()->line('');
         Elixir::console()->info('   Combining Files...');
         foreach ($source_paths as $path) {
@@ -86,7 +86,7 @@ class CombineExtension extends AbstractExtension
                 $path = substr($path, 0, -1);
                 $method = 'base';
             } else {
-                $file_paths = $path;
+                $file_paths = [$path];
             }
 
             // Lookup file paths

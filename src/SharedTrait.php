@@ -84,10 +84,10 @@ trait SharedTrait
         }
         unset($config['paths']);
 
-        // The config file declares 3rd party extensions.
-        if (isset($config['extensions'])) {
+        // The config file declares 3rd party modules.
+        if (isset($config['modules'])) {
         }
-        unset($config['extensions']);
+        unset($config['modules']);
 
         $run_tasks = [];
         $ignore_tasks = [];
@@ -117,9 +117,9 @@ trait SharedTrait
             }
 
             // Create the class name and check.
-            $task_class = __NAMESPACE__.'\\Extensions\\'.studly_case($task).'Extension';
+            $task_class = __NAMESPACE__.'\\Modules\\'.studly_case($task).'Module';
             if (!class_exists($task_class)) {
-                $this->error(sprintf('Extension \'%s\' can not be found.', $task));
+                $this->error(sprintf('Module \'%s\' can not be found.', $task));
 
                 return false;
             }
@@ -298,9 +298,9 @@ trait SharedTrait
 
         if (is_array($filter) && count($filter)) {
             $paths = array_filter($paths, function ($path) use ($filter) {
-                $extension = pathinfo($path, PATHINFO_EXTENSION);
+                $module = pathinfo($path, PATHINFO_EXTENSION);
 
-                return in_array($extension, $filter);
+                return in_array($module, $filter);
             });
         }
 

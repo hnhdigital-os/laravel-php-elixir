@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpElixir\Extensions;
+namespace PhpElixir\Modules;
 
-use PhpElixir\AbstractExtension;
+use PhpElixir\AbstractModule;
 use PhpElixir\ElixirConsoleCommand as Elixir;
 
-class EmptyExtension extends AbstractExtension
+class EmptyModule extends AbstractModule
 {
     /**
      * Verify the configuration for this task.
@@ -43,7 +43,7 @@ class EmptyExtension extends AbstractExtension
      */
     public function run($index, $clear_path)
     {
-        Elixir::commandInfo('Running \'empty\' extension...');
+        Elixir::commandInfo('Running \'empty\' module...');
         Elixir::console()->line('');
         Elixir::console()->info('   Clearing files and folders from...');
         Elixir::console()->line(sprintf(' - %s', $clear_path));

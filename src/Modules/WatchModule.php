@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpElixir\Extensions;
+namespace PhpElixir\Modules;
 
-use PhpElixir\AbstractExtension;
+use PhpElixir\AbstractModule;
 use PhpElixir\ElixirWatchCommand as Elixir;
 
-class WatchExtension extends AbstractExtension
+class WatchModule extends AbstractModule
 {
     /**
      * Verify the configuration for this task.

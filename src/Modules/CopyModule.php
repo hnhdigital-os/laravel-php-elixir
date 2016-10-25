@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpElixir\Extensions;
+namespace PhpElixir\Modules;
 
-use PhpElixir\AbstractExtension;
+use PhpElixir\AbstractModule;
 use PhpElixir\ElixirConsoleCommand as Elixir;
 
-class CopyExtension extends AbstractExtension
+class CopyModule extends AbstractModule
 {
     /**
      * Error understanding path.
@@ -135,7 +135,7 @@ class CopyExtension extends AbstractExtension
      */
     public function run($source_path, $destination_path)
     {
-        Elixir::commandInfo('Executing \'copy\' extension...');
+        Elixir::commandInfo('Executing \'copy\' module...');
         Elixir::console()->line('');
         Elixir::console()->info('   Copying Files From...');
         Elixir::console()->line(sprintf(' - %s', $source_path));

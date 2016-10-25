@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpElixir\Extensions;
+namespace PhpElixir\Modules;
 
-use PhpElixir\AbstractExtension;
+use PhpElixir\AbstractModule;
 use PhpElixir\ElixirConsoleCommand as Elixir;
 
-class ReplaceExtension extends AbstractExtension
+class ReplaceModule extends AbstractModule
 {
     /**
      * Verify the configuration for this task.
@@ -36,7 +36,7 @@ class ReplaceExtension extends AbstractExtension
      */
     public function run($source_path, $find_replace)
     {
-        Elixir::commandInfo('Executing \'replace\' extension...');
+        Elixir::commandInfo('Executing \'replace\' module...');
         Elixir::console()->line('');
         Elixir::console()->info('   Updating...');
         Elixir::console()->line(sprintf(' - %s', $source_path));

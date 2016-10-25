@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpElixir\Extensions;
+namespace PhpElixir\Modules;
 
-use PhpElixir\AbstractExtension;
+use PhpElixir\AbstractModule;
 use PhpElixir\ElixirConsoleCommand as Elixir;
 
-class RevisionExtension extends AbstractExtension
+class RevisionModule extends AbstractModule
 {
     /**
      * Verify the configuration for this task.
@@ -52,7 +52,7 @@ class RevisionExtension extends AbstractExtension
      */
     public function run($source_path, $options)
     {
-        Elixir::commandInfo('Executing \'rev\' extension...');
+        Elixir::commandInfo('Executing \'rev\' module...');
         Elixir::console()->line('');
         Elixir::console()->info('   Revisioning files in...');
         Elixir::console()->line(sprintf(' - %s', $source_path));

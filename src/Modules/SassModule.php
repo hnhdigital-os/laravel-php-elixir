@@ -1,12 +1,12 @@
 <?php
 
-namespace PhpElixir\Extensions;
+namespace PhpElixir\Modules;
 
 use Leafo\ScssPhp\Compiler;
-use PhpElixir\AbstractExtension;
+use PhpElixir\AbstractModule;
 use PhpElixir\ElixirConsoleCommand as Elixir;
 
-class SassExtension extends AbstractExtension
+class SassModule extends AbstractModule
 {
     /**
      * Verify the configuration for this task.
@@ -41,7 +41,7 @@ class SassExtension extends AbstractExtension
      */
     public function run($source_path, $destination_path)
     {
-        Elixir::commandInfo('Executing \'sass\' extension...');
+        Elixir::commandInfo('Executing \'sass\' module...');
         Elixir::console()->line('');
         Elixir::console()->info('   Fetching Sass Source Files...');
         Elixir::console()->line(sprintf(' - %s', $source_path));

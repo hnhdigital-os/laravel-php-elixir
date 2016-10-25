@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpElixir\Extensions;
+namespace PhpElixir\Modules;
 
-use PhpElixir\AbstractExtension;
+use PhpElixir\AbstractModule;
 use PhpElixir\ElixirConsoleCommand as Elixir;
 
-class ExecExtension extends AbstractExtension
+class ExecModule extends AbstractModule
 {
     /**
      * Verify the configuration for this task.
@@ -73,7 +73,7 @@ class ExecExtension extends AbstractExtension
      */
     public function run($executable_file_path, $arguments)
     {
-        Elixir::commandInfo('Executing \'exec\' extension...');
+        Elixir::commandInfo('Executing \'exec\' module...');
         Elixir::console()->line('');
         Elixir::console()->info('   Executing...');
         Elixir::console()->line(sprintf(' - %s %s', $executable_file_path, $arguments));

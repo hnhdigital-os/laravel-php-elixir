@@ -2,7 +2,7 @@
 
 namespace PhpElixir;
 
-abstract class AbstractExtension
+abstract class AbstractModule
 {
     /**
      * Verify the configuration for this task.
