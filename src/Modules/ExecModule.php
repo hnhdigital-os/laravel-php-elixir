@@ -113,6 +113,7 @@ class ExecModule extends AbstractModule
 
         if (stripos($path, 'which: no') === false) {
             $path = trim(shell_exec(sprintf('readlink -f %s', $path)));
+
             return file_exists($path) ? $path : false;
         }
 

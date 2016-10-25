@@ -78,7 +78,7 @@ class ElixirWatchCommand extends Command
         }
 
         static::console()->line('');
-        
+
         return $this->listen();
     }
 
@@ -112,7 +112,7 @@ class ElixirWatchCommand extends Command
     /**
      * Process the events that have occured.
      *
-     * @param  array $events
+     * @param array $events
      *
      * @return bool
      */
