@@ -13,14 +13,15 @@ Tasks are sequentially run in the order that they are declared in the configurat
 * Empty - removes all files and folders in the directory.
 * Combine - combine a number of files into a single file.
 * Copy - copy a file or files (current directory or all files in directory).
+* Exec - execute an external shell command.
 * Replace - replace specific text in a file or files.
 * Revision - revision files and store in a rev-manifest.json file.
 * SASS - process and compile a scss file.
 
 ## Task modules for future releases
 
-* Exec - execute an external shell command.
 * Less - compile less css files.
+* Webpack - process JS files.
 
 ## Watcher
 
@@ -114,6 +115,15 @@ Deletes all files and folders in the listed paths.
 empty:
     - PATH_PUBLIC_ASSETS
     - PATH_PUBLIC_BUILD
+```
+
+### Exec
+
+Executes a given file and arguments.
+
+```yaml
+exec:
+    php: artisan inspire
 ```
 
 ### SASS
