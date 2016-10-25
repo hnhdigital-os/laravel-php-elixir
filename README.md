@@ -129,7 +129,9 @@ sass:
 
 ### Combine
 
-Gets the contents of files in one or many files or folders and combines it into the specified file.
+Gets the contents of one or many files and combines it into the specified file.
+
+Source folders can be specified with single level or multi-level lookup, and the ability to filter files by extension.
 
 ```
 {DESTINATION_FILE}:
