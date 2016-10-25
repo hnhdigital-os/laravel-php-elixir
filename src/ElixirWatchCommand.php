@@ -4,7 +4,6 @@ namespace PhpElixir;
 
 use Config;
 use Illuminate\Console\Command;
-use Symfony\Component\Yaml\Yaml;
 
 class ElixirWatchCommand extends Command
 {

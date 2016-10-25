@@ -80,7 +80,7 @@ class CopyModule extends AbstractModule
                 break;
         }
 
-        
+
 
         return true;
     }

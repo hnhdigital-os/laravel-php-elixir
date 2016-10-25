@@ -42,18 +42,18 @@ class ExecModule extends AbstractModule
 
         if ($file_stat['uid'] == $file_uid) {
             $is_executable = (($permissions & 0x0040) ?
-                (($permissions & 0x0800) ? true : true ) :
+                (($permissions & 0x0800) ? true : true) :
                 (($permissions & 0x0800) ? true : $is_executable));
         }
 
         if ($file_stat['gid'] == $file_gid) {
             $is_executable = (($permissions & 0x0008) ?
-                (($permissions & 0x0400) ? true : true ) :
+                (($permissions & 0x0400) ? true : true) :
                 (($permissions & 0x0400) ? true : $is_executable));
         }
 
         $is_executable = (($permissions & 0x0001) ?
-            (($permissions & 0x0200) ? true : true ) :
+            (($permissions & 0x0200) ? true : true) :
             (($permissions & 0x0200) ? true : $is_executable));
 
         if (!$is_executable) {
@@ -92,15 +92,16 @@ class ExecModule extends AbstractModule
                 Elixir::console()->line('');
             }
         }
+
         return true;
     }
 
     /**
      * Get absolute path for a executable file.
      *
-     * @param  string $path
+     * @param string $path
      *
-     * @return string|boolean
+     * @return string|bool
      */
     private static function getAbsolutePath($path)
     {
@@ -111,7 +112,7 @@ class ExecModule extends AbstractModule
 
         if (stripos($path, 'which: no') === false) {
             $path = trim(shell_exec(sprintf('readlink -f %s', $path)));
-        } else{
+        } else {
             return false;
         }
 
