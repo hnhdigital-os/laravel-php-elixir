@@ -43,7 +43,44 @@ class CopyExtension extends AbstractExtension
             return false;
         }
 
-        Elixir::storePath($source_path, $destination_path);
+        Elixir::storePath($source_path);
+
+        // Generate the new file paths so we can validate other tasks in the future.
+        switch ($method) {
+            /*
+             * Copying all files.
+             * or Copying files from the base of the provided directory.
+             */
+            case self::COPY_ALL:
+            case self::COPY_BASE:
+                $method_arguments = ($method == self::COPY_BASE) ? [true, 1] : [];
+                $paths = Elixir::scan($source_path, false, ...$method_arguments);
+                $paths = Elixir::filterPaths($paths, array_get($options, 'source.filter', ''));
+
+                if (substr($destination_path, -1) != '/') {
+                    $destination_path .= '/';
+                }
+
+                foreach ($paths as $path) {
+                    $destination_file = $destination_path.$path;
+                    Elixir::storePath($destination_file);
+                }
+                break;
+
+            /*
+             * Copying a single file.
+             */
+            case self::COPY_FILE:
+                if (substr($destination_path, -1) == '/') {
+                    $destination_path = Elixir::checkPath($destination_path, !Elixir::dryRun());
+                    $source_basename = basename($source_path);
+                    $destination_path .= $source_basename;
+                }
+                Elixir::storePath($destination_path);
+                break;
+        }
+
+        
 
         return true;
     }
