@@ -52,7 +52,7 @@ class CombineModule extends AbstractModule
         Elixir::console()->info('   Combining Files...');
         foreach ($source_paths as $path) {
             Elixir::console()->line(sprintf(' - %s', $path));
-        }        
+        }
         Elixir::console()->line('');
         Elixir::console()->info('   Saving To...');
         Elixir::console()->line(sprintf(' - %s', $destination_path));
@@ -110,7 +110,7 @@ class CombineModule extends AbstractModule
 
         // Put the contents into the new file.
         Elixir::makeDir($destination_path);
-         if (Elixir::verbose()) {
+        if (Elixir::verbose()) {
             Elixir::console()->line(sprintf('   Created:   %s', str_replace(base_path(), '', $destination_path)));
             Elixir::console()->line('');
         }
