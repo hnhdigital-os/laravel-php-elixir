@@ -11,14 +11,14 @@ Tasks are sequentially run in the order that they are declared in the configurat
 ## Available task modules
 
 * Empty - removes all files and folders in the directory.
+* Combine - combine a number of files into a single file.
 * Copy - copy a file or files (current directory or all files in directory).
 * Replace - replace specific text in a file or files.
-* SASS - process and compile a scss file.
 * Revision - revision files and store in a rev-manifest.json file.
+* SASS - process and compile a scss file.
 
 ## Task modules for future releases
 
-* Combine - combine a number of files into a single file.
 * Exec - execute an external shell command.
 * Less - compile less css files.
 
@@ -125,6 +125,26 @@ Formatted as: {SOURCE_FILE_PATH}: {DESTINATION_FILE_PATH}
 ```yaml
 sass:
     PATH_SASS + /app.scss: PATH_PUBLIC_ASSETS + /vendor/app.css
+```
+
+### Combine
+
+Gets the contents of files in one or many files or folders and combines it into the specified file.
+
+```
+{DESTINATION_FILE}:
+    - {SOURCE_FILE}
+    - {SOURCE_FOLDER}
+```
+
+```yaml
+combine:
+    PATH_PUBLIC_ASSETS + /vendor/jquery-combined.min.js:
+        - PATH_PUBLIC_ASSETS + /vendor/jquery/jquery.min.js
+        - PATH_PUBLIC_ASSETS + /vendor/jquery-ui/jquery-ui.min.js
+    PATH_PUBLIC_ASSETS + /vendor/combined.js:
+        - PATH_PUBLIC_ASSETS + /vendor/**?filter=js
+
 ```
 
 ### Copy
