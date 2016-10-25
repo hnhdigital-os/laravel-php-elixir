@@ -35,7 +35,7 @@ Run 'php artisan elixir:watch' to start up the watcher. It provides some verbose
 
 Install via composer:
 
-`composer require bluora/laravel-php-elixir dev-master`
+`composer require bluora/laravel-php-elixir ~1.0`
 
 Add it to your available console commands in app/Console/Kernel.php:
 
