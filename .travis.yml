@@ -1,6 +1,7 @@
 before_script:
   - composer self-update
-  - if [ "${$(phpenv version-name)//[.]/}" -lt "70" ];
+  - PHP_VERSION_NAME $(phpenv version-name)
+  - if [ "${PHP_VERSION_NAME//[.]/}" -lt "70" ];
     then pecl install -f inotify-0.1.6; else
     pecl install inotify;
     fi
