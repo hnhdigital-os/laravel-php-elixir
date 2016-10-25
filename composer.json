@@ -1,6 +1,6 @@
 {
     "name": "bluora/laravel-php-elixir",
-    "description": "Provides a PHP based equivalent to JS based Elixir",
+    "description": "Provides a PHP based equivalent to Node.js based Elixir",
     "keywords": ["laravel", "elixir"],
     "license": "MIT",
     "authors": [
