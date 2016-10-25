@@ -223,7 +223,7 @@ trait SharedTrait
         }
         if ($create_folder) {
             $path = base_path().'/'.str_replace(base_path(), '', $path);
-            self::makeDir($path);
+            self::makeDir($path, true);
 
             return $path;
         }
@@ -253,10 +253,12 @@ trait SharedTrait
      *
      * @param string $scan_path
      * @param bool   $include_folders
+     * @param bool   $include_files
+     * @param int    $depth
      *
      * @return void
      */
-    public static function scan($scan_path, $include_folders = true, $include_files = true)
+    public static function scan($scan_path, $include_folders = true, $include_files = true, $depth = -1)
     {
         $paths = [];
 
@@ -271,8 +273,8 @@ trait SharedTrait
                 continue;
             }
             $absolute_path = $scan_path.$value;
-            if (is_dir($absolute_path)) {
-                $new_paths = self::scan($absolute_path.'/', $include_folders, $include_files);
+            if (is_dir($absolute_path) && $depth <> 0) {
+                $new_paths = self::scan($absolute_path.'/', $include_folders, $include_files, $depth-1);
                 $paths = array_merge($paths, $new_paths);
             }
             if ((is_file($absolute_path) && $include_files) || (is_dir($absolute_path) && $include_folders)) {
@@ -323,19 +325,20 @@ trait SharedTrait
      * Make directories using the provided path.
      *
      * @param string $path
+     * @param bool   $is_directory
      *
      * @return void
      */
-    public static function makeDir($path)
+    public static function makeDir($path, $is_directory = false)
     {
-        $path = dirname($path);
+        $path = $is_directory ? $path : dirname($path);
         if (!file_exists($path)) {
-            $existing_parent_path = $path;
-            while (!file_exists($existing_parent_path)) {
-                $existing_parent_path = dirname($existing_parent_path);
+            $parent_path = $path;
+            while (!file_exists($parent_path)) {
+                $parent_path = dirname($parent_path);
             }
 
-            mkdir($path, fileperms($existing_parent_path), true);
+            mkdir($path, fileperms($parent_path), true);
         }
     }
 }
