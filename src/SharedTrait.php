@@ -16,11 +16,46 @@ trait SharedTrait
     protected static $console;
 
     /**
-     * YML file name for options.
+     * Parsed options.
      *
      * @var array
      */
-    protected $yml_options = '.elixir.yml';
+    private $options = [];
+
+    /**
+     * Parsed paths.
+     *
+     * @var array
+     */
+    private $paths = [];
+
+    /**
+     * Collection of paths that this tool creates or uses.
+     *
+     * @var array
+     */
+    private $path_check = [];
+
+    /**
+     * Parsed tasks.
+     *
+     * @var array
+     */
+    private $tasks = [];
+
+    /**
+     * Configuration file name.
+     *
+     * @var string
+     */
+    protected $config_yaml_file = '.elixir.yml';
+
+    /**
+     * Configuration file's absolute path.
+     *
+     * @var string
+     */
+    protected $config_yaml_file_path = '';
 
     /**
      * Static link to this running command.
@@ -47,19 +82,33 @@ trait SharedTrait
             return false;
         }
 
+        if (!empty($this->option('config'))) {
+            $this->config_yaml_file = $this->option('config');
+        }
+
+        $this->config_yaml_file_path = $this->config_yaml_file;
+
+        if (!file_exists($this->config_yaml_file_path)) {
+            $this->config_yaml_file_path = base_path().'/'.$this->config_yaml_file;
+        }
+
         // Check YAML config file exists.
-        if (!file_exists(base_path().'/'.$this->yml_options)) {
-            $this->error('Required elixir.yml file is missing.');
+        if (!file_exists($this->config_yaml_file_path) && $this->config_yaml_file == '.elixir.yml') {
+            $this->error('Required .elixir.yml file is missing.');
             $this->info('We have copied the example file for you.');
             $this->line('Please edit and re-run this command.');
             copy(__DIR__.'/.elixir.yml.example', base_path().'/'.'.elixir.yml');
+
+            return false;
+        } elseif (!file_exists($this->config_yaml_file_path)) {
+            $this->error('The config file provided does not exist.');
 
             return false;
         }
 
         // Parse the YAML config file.
         try {
-            $config = Yaml::parse(file_get_contents(base_path().'/'.$this->yml_options));
+            $config = Yaml::parse(file_get_contents($this->config_yaml_file_path));
         } catch (ParseException $e) {
             $this->error(sprintf('Unable to parse .elixir.yml: %s', $e->getMessage()));
 
@@ -133,6 +182,9 @@ trait SharedTrait
                 $this->tasks[] = ['class' => $task_class, 'arguments' => [$key, $settings]];
             }
         }
+
+        static::commandInfo('Config file being used: %s.', $this->config_yaml_file_path);
+        static::console()->line('');
 
         return true;
     }

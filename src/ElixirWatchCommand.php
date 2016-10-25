@@ -11,6 +11,27 @@ class ElixirWatchCommand extends Command
     use SharedTrait;
 
     /**
+     * The console command name.
+     *
+     * @var string
+     */
+    protected $name = 'elixir:watch';
+
+    /**
+     * The console command signature.
+     *
+     * @var string
+     */
+    protected $signature = 'elixir:watch {--config=}';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Run the elixir watch runner.';
+
+    /**
      * Notify instance.
      *
      * @var array
@@ -32,20 +53,6 @@ class ElixirWatchCommand extends Command
     private $track_watches = [];
 
     /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'elixir:watch';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Run the elixir watch runner.';
-
-    /**
      * Execute the console command.
      *
      * @return int
@@ -56,9 +63,6 @@ class ElixirWatchCommand extends Command
         if (!$this->verify()) {
             return 1;
         }
-
-        static::commandInfo('Using yaml file %s.', base_path().'/'.$this->yml_options);
-        static::console()->line('');
 
         // Initialize an inotify instance.
         $this->watcher = inotify_init();
