@@ -76,11 +76,7 @@ class EmptyModule extends AbstractModule
             }
 
             if (!Elixir::dryRun()) {
-                if (is_dir($path)) {
-                    rmdir($path);
-                } else {
-                    unlink($path);
-                }
+                is_dir($path) ? rmdir($path) : unlink($path);
             }
         }
 

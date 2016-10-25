@@ -11,11 +11,10 @@ class ReplaceModule extends AbstractModule
      * Verify the configuration for this task.
      *
      * @param string $source_path
-     * @param array  $find_replace
      *
      * @return bool
      */
-    public static function verify($source_path, $find_replace)
+    public static function verify($source_path)
     {
         if (!Elixir::checkPath($source_path, false, true)) {
             return false;
@@ -83,15 +82,15 @@ class ReplaceModule extends AbstractModule
         // Single file is provided.
         if (is_file($source_path)) {
             return $this->findReplace($find, $replace, $source_path, $options);
-        } else {
-            $paths = Elixir::scan($source_path, false);
-            $paths = Elixir::filterPaths($paths, array_get($options, 'filter', ''));
+        }
 
-            foreach ($paths as $source_path) {
-                Elixir::console()->line(sprintf('   Processing %s', $source_path));
-                $this->findReplace($find, $replace, $source_path, $options);
-                Elixir::console()->line('');
-            }
+        $paths = Elixir::scan($source_path, false);
+        $paths = Elixir::filterPaths($paths, array_get($options, 'filter', ''));
+
+        foreach ($paths as $source_path) {
+            Elixir::console()->line(sprintf('   Processing %s', $source_path));
+            $this->findReplace($find, $replace, $source_path, $options);
+            Elixir::console()->line('');
         }
 
         return true;
@@ -110,12 +109,12 @@ class ReplaceModule extends AbstractModule
                 $original_find_array[1] = '';
             }
 
+            $method = 'str_replace';
+
             // Enabled PCRE string replacement.
             if (array_has($options, 'preg')) {
                 $find = '~'.$find.'~';
                 $method = 'preg_replace';
-            } else {
-                $method = 'str_replace';
             }
 
             // Get file contents.
@@ -138,11 +137,9 @@ class ReplaceModule extends AbstractModule
                     $find = preg_quote($find);
                 }
                 preg_match_all('~'.$find.'~', $content, $matches);
-                if (isset($matches[0])) {
-                    Elixir::console()->info(sprintf('   Found %s matches for %s.', count($matches[0]), $original_find));
-                } else {
-                    Elixir::console()->line(sprintf('   Found no matches for %s', $original_find));
-                }
+
+                $match_count = isset($matches[0]) ? count($matches[0]) : 'no';
+                Elixir::console()->line(sprintf('   Found %s matches for %s', $match_count, $original_find));
             }
 
             return true;

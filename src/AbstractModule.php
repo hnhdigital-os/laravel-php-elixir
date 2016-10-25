@@ -7,12 +7,9 @@ abstract class AbstractModule
     /**
      * Verify the configuration for this task.
      *
-     * @param string $key
-     * @param mixed  $settings
-     *
      * @return bool
      */
-    public static function verify($key, $settings)
+    public static function verify()
     {
         return true;
     }
@@ -20,12 +17,9 @@ abstract class AbstractModule
     /**
      * Run the task.
      *
-     * @param string $key
-     * @param mixed  $settings
-     *
      * @return bool
      */
-    public function run($key, $settings)
+    public function run()
     {
         return true;
     }
