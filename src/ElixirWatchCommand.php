@@ -101,7 +101,6 @@ class ElixirWatchCommand extends Command
                     static::console()->line('   Changes occured. Running elixir.');
                     exec('php artisan elixir');
                     static::console()->line('');
-                    $run_elixir = false;
                 }
             }
         }
