@@ -115,7 +115,7 @@ Watch configuruation item is only used by the elixir:watch console command.
 
 ```yaml
 watch:
-    - PATH_RESOURCES
+    - PATH_RESOURCES?filter=!php
 ```
 
 ### Empty
