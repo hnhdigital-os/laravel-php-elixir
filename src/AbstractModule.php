@@ -9,7 +9,7 @@ abstract class AbstractModule
      *
      * @return bool
      */
-    public static function verify()
+    public static function verify($parameter1, $parameter2)
     {
         return true;
     }
