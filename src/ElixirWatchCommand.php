@@ -52,6 +52,13 @@ class ElixirWatchCommand extends Command
     private $track_watches = [];
 
     /**
+     * Options for paths.
+     *
+     * @var array
+     */
+    private $path_options = [];
+
+    /**
      * Execute the console command.
      *
      * @return int
@@ -137,6 +144,7 @@ class ElixirWatchCommand extends Command
             elseif (isset($this->track_watches[$event_detail['wd']])) {
                 // File or folder path
                 $file_path = $this->track_watches[$event_detail['wd']].'/'.$event_detail['name'];
+                $path_options = $this->path_options[$event_detail['wd']];
 
                 if ($is_dir) {
                     switch ($event_detail['mask']) {
@@ -145,7 +153,7 @@ class ElixirWatchCommand extends Command
                         // New folder was moved, so need to watch new folders.
                         // New files will run elixir.
                         case IN_MOVED_TO:
-                            $this->addPath($file_path);
+                            $this->addPath($file_path, $path_options);
                             break;
 
                         // Folder was deleted or moved.
@@ -157,6 +165,16 @@ class ElixirWatchCommand extends Command
                     }
 
                     return false;
+                }
+
+                // Check file extension against the specified filter.
+                $file_extension = pathinfo($file_path, PATHINFO_EXTENSION);
+                if (isset($path_options['filter']) && $file_extension != '') {
+                    $extension_allowed = in_array($file_extension, $path_options['filter']);
+                    $extension_not_allowed = in_array('!'.$file_extension, $path_options['filter']);
+                    if (!$extension_allowed || $extension_not_allowed) {
+                        return false;
+                    }
                 }
 
                 // Run elixir for all these file events.
@@ -181,13 +199,23 @@ class ElixirWatchCommand extends Command
      *
      * @return void
      */
-    private function addPath($path)
+    private function addPath($original_path, $options = false)
     {
-        static::console()->line('   Watching '.$path);
+        static::console()->line('   Watching '.$original_path);
+        $path = trim($original_path);
+
+        if ($options === false) {
+            list($path, $options) = self::parseOptions($path);
+        }
+
+        if (isset($options['filter'])) {
+            $options['filter'] = explode(',', $options['filter']);
+        }
 
         // Watch this folder.
         $watch_id = inotify_add_watch($this->watcher, $path, $this->watch_constants);
         $this->track_watches[$watch_id] = $path;
+        $this->path_options[$watch_id] = $options;
 
         if (is_dir($path)) {
             // Find and watch any children folders.
@@ -196,6 +224,7 @@ class ElixirWatchCommand extends Command
                 if (file_exists($folder_path)) {
                     $watch_id = inotify_add_watch($this->watcher, $folder_path, $this->watch_constants);
                     $this->track_watches[$watch_id] = $folder_path;
+                    $this->path_options[$watch_id] = $options;
                 }
             }
         }
@@ -221,6 +250,7 @@ class ElixirWatchCommand extends Command
             } catch (\Exception $exception) {
             }
             unset($this->track_watches[$watch_id]);
+            unset($this->path_options[$watch_id]);
         }
     }
 }

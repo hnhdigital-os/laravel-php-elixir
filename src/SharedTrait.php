@@ -257,7 +257,7 @@ trait SharedTrait
      */
     public static function checkPath($original_path, $create_folder = false, $only_check = false)
     {
-        $path = trim($original_path);
+        list($path, $options) = self::parseOptions(trim($original_path));
         $base_path = str_replace('//', '/', base_path().'/'.$path);
 
         if ($only_check) {
