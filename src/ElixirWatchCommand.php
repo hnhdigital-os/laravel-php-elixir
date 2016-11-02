@@ -106,7 +106,10 @@ class ElixirWatchCommand extends Command
                 // Changes occurred that require elixir to run.
                 if ($this->processEvents($events)) {
                     static::console()->line('   Changes occured. Running elixir.');
+                    $bar = $this->output->createProgressBar();
+                    $bar->setFormat('normal_nomax');
                     exec('php artisan elixir');
+                    $bar->finish();
                     static::console()->line('');
                 }
             }
