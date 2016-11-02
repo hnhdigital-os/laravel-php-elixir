@@ -107,7 +107,8 @@ class ElixirWatchCommand extends Command
                 if ($this->processEvents($events)) {
                     static::console()->line('   Changes occured. Running elixir.');
                     $bar = $this->output->createProgressBar();
-                    $bar->setFormat('normal_nomax');
+                    $bar->setFormat('[%bar%] %elapsed:6s%');
+                    $bar->start();
                     exec('php artisan elixir');
                     $bar->finish();
                     static::console()->line('');
