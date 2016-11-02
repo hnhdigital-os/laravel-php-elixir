@@ -116,9 +116,10 @@ class ElixirWatchCommand extends Command
                         $bar->advance();
                         $op = [];
                         exec('ps -p '.$pid, $op);
-                        $running = !isset($op[1]);
+                        $running = isset($op[1]);
                     }
                     $bar->finish();
+                    static::console()->line('');
                     static::console()->line('');
                 }
             }
