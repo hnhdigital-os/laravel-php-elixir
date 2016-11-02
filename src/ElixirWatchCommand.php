@@ -109,7 +109,7 @@ class ElixirWatchCommand extends Command
                     $bar->setFormat('   [%bar%] %elapsed:6s%');
                     $op = [];
                     exec('nohup php artisan elixir > /dev/null 2>&1 & echo $!', $op);
-                    $pid = (int)$op[0];
+                    $pid = (int) $op[0];
                     $running = true;
                     while ($running) {
                         $bar->advance();
@@ -223,10 +223,10 @@ class ElixirWatchCommand extends Command
 
         if (isset($options['filter'])) {
             $options['filter'] = explode(',', $options['filter']);
-            $options['filter_allowed'] = array_filter($options['filter'], function($value) {
+            $options['filter_allowed'] = array_filter($options['filter'], function ($value) {
                 return substr($value, 0, 1) !== '!';
             });
-            $options['filter_not_allowed'] = array_filter($options['filter'], function($value) {
+            $options['filter_not_allowed'] = array_filter($options['filter'], function ($value) {
                 return substr($value, 0, 1) === '!';
             });
         }

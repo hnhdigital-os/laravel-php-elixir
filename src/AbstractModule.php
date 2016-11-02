@@ -22,7 +22,7 @@ abstract class AbstractModule
      *
      * @param mixed $parameter1
      * @param mixed $parameter2
-     * 
+     *
      * @return bool
      */
     public function run($parameter1, $parameter2)
