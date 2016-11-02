@@ -107,9 +107,17 @@ class ElixirWatchCommand extends Command
                 if ($this->processEvents($events)) {
                     static::console()->line('   Changes occured. Running elixir.');
                     $bar = $this->output->createProgressBar();
-                    $bar->setFormat('[%bar%] %elapsed:6s%');
-                    $bar->start();
-                    exec('php artisan elixir');
+                    $bar->setFormat('   [%bar%] %elapsed:6s%');
+                    $op = [];
+                    exec('nohup php artisan elixir > /dev/null 2>&1 & echo $!', $op);
+                    $pid = (int)$op[0];
+                    $running = true;
+                    while ($running) {
+                        $bar->advance();
+                        $op = [];
+                        exec('ps -p '.$pid, $op);
+                        $running = !isset($op[1]);
+                    }
                     $bar->finish();
                     static::console()->line('');
                 }
