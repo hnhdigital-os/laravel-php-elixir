@@ -105,7 +105,7 @@ class ElixirWatchCommand extends Command
             if ($events !== false && count($events)) {
                 // Changes occurred that require elixir to run.
                 if ($this->processEvents($events)) {
-                    $bar = $this->output->createProgressBar(10);
+                    $bar = $this->output->createProgressBar();
                     $bar->setFormat('   [%bar%] %elapsed:6s%');
                     $op = [];
                     exec('nohup php artisan elixir > /dev/null 2>&1 & echo $!', $op);
