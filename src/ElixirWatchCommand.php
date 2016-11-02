@@ -170,9 +170,10 @@ class ElixirWatchCommand extends Command
                 // Check file extension against the specified filter.
                 $file_extension = pathinfo($file_path, PATHINFO_EXTENSION);
                 if (isset($path_options['filter']) && $file_extension != '') {
-                    $extension_allowed = in_array($file_extension, $path_options['filter']);
-                    $extension_not_allowed = in_array('!'.$file_extension, $path_options['filter']);
-                    if (!$extension_allowed || $extension_not_allowed) {
+                    if (count($path_options['filter_allowed']) && !in_array($file_extension, $path_options['filter_allowed'])) {
+                        return false;
+                    }
+                    if (count($path_options['filter_not_allowed']) && in_array($file_extension, $path_options['filter_not_allowed'])) {
                         return false;
                     }
                 }
@@ -210,6 +211,12 @@ class ElixirWatchCommand extends Command
 
         if (isset($options['filter'])) {
             $options['filter'] = explode(',', $options['filter']);
+            $options['filter_allowed'] = array_filter($options['filter'], function($value) {
+                return substr($value, 0, 1) !== '!';
+            });
+            $options['filter_not_allowed'] = array_filter($options['filter'], function($value) {
+                return substr($value, 0, 1) === '!';
+            });
         }
 
         // Watch this folder.
