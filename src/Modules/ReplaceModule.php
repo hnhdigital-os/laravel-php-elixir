@@ -11,16 +11,25 @@ class ReplaceModule extends AbstractModule
      * Verify the configuration for this task.
      *
      * @param string $source_path
+     * @param array  $find_replace
      *
      * @return bool
      */
-    public static function verify($source_path)
+    public static function verify($source_path, $find_replace)
     {
         if (!Elixir::checkPath($source_path, false, true)) {
             return false;
         }
 
         Elixir::storePath($source_path);
+
+        if (count($find_replace) != 2) {
+            return false;
+        }
+
+        if (empty($find_replace[0])) {
+            return false;
+        }
 
         return true;
     }
