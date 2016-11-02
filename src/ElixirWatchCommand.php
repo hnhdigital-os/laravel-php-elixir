@@ -185,7 +185,7 @@ class ElixirWatchCommand extends Command
                     if (count($path_options['filter_allowed']) && !in_array($file_extension, $path_options['filter_allowed'])) {
                         return false;
                     }
-                    if (count($path_options['filter_not_allowed']) && in_array($file_extension, $path_options['filter_not_allowed'])) {
+                    if (count($path_options['filter_not_allowed']) && in_array('!'.$file_extension, $path_options['filter_not_allowed'])) {
                         return false;
                     }
                 }
