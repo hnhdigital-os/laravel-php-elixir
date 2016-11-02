@@ -7,6 +7,9 @@ abstract class AbstractModule
     /**
      * Verify the configuration for this task.
      *
+     * @param mixed $parameter1
+     * @param mixed $parameter2
+     *
      * @return bool
      */
     public static function verify($parameter1, $parameter2)
@@ -17,9 +20,12 @@ abstract class AbstractModule
     /**
      * Run the task.
      *
+     * @param mixed $parameter1
+     * @param mixed $parameter2
+     * 
      * @return bool
      */
-    public function run()
+    public function run($parameter1, $parameter2)
     {
         return true;
     }
