@@ -1,5 +1,7 @@
 # Laravel PHP-Elixir
 
+This package has been developed by H&H|Digital, an Australian botique developer. Visit us at [hnh.digital](http://hnh.digital).
+
 [![Latest Stable Version](https://poser.pugx.org/bluora/laravel-php-elixir/v/stable.svg)](https://packagist.org/packages/bluora/laravel-php-elixir) [![Total Downloads](https://poser.pugx.org/bluora/laravel-php-elixir/downloads.svg)](https://packagist.org/packages/bluora/laravel-php-elixir) [![Latest Unstable Version](https://poser.pugx.org/bluora/laravel-php-elixir/v/unstable.svg)](https://packagist.org/packages/bluora/laravel-php-elixir) [![License](https://poser.pugx.org/bluora/laravel-php-elixir/license.svg)](https://packagist.org/packages/bluora/laravel-php-elixir)
 
 [![Build Status](https://travis-ci.org/bluora/laravel-php-elixir.svg?branch=master)](https://travis-ci.org/bluora/laravel-php-elixir) [![StyleCI](https://styleci.io/repos/69619219/shield?branch=master)](https://styleci.io/repos/69619219) [![Test Coverage](https://codeclimate.com/github/bluora/laravel-php-elixir/badges/coverage.svg)](https://codeclimate.com/github/bluora/laravel-php-elixir/coverage) [![Issue Count](https://codeclimate.com/github/bluora/laravel-php-elixir/badges/issue_count.svg)](https://codeclimate.com/github/bluora/laravel-php-elixir) [![Code Climate](https://codeclimate.com/github/bluora/laravel-php-elixir/badges/gpa.svg)](https://codeclimate.com/github/bluora/laravel-php-elixir) 
@@ -8,29 +10,13 @@ Provides a replacement of the Node.js based elixir pre-packaged with Laravel Fra
 
 Tasks are sequentially run in the order that they are declared in the configuration file. You can specify more than one task module block.
 
-## Available task modules
+## Install
 
-* Empty - removes all files and folders in the directory.
-* Combine - combine a number of files into a single file.
-* Copy - copy a file or files (current directory or all files in directory).
-* Exec - execute an external shell command.
-* Replace - replace specific text in a file or files.
-* Revision - revision files and store in a rev-manifest.json file.
-* SASS - process and compile a scss file.
+Via composer:
 
-## Task modules for future releases
+`$ composer require-dev bluora/laravel-php-elixir ~1.0`
 
-* Less - compile less css files.
-* Webpack - process JS files.
-
-
-## Installation
-
-Install via composer:
-
-`composer require-dev bluora/laravel-php-elixir ~1.0`
-
-Add it to your available console commands in app/Console/Kernel.php:
+Enable the console command by editing app/Console/Kernel.php:
 
 ```php
     /**
@@ -42,28 +28,29 @@ Add it to your available console commands in app/Console/Kernel.php:
       ...
       \PhpElixir\ElixirConsoleCommand::class,
       \PhpElixir\ElixirWatchCommand::class,
+      ...
     ];
 ```
 
-Run  'php artisan elixir' to copy the default config file which will copy to your base folder as '.elixir.yml'.
+You can run 'php artisan elixir' to copy the default config file to '.elixir.yml'.
 
-## Execute tasks
+## Usage
 
-Tasks listed in the default config file can be executed by running 'php artisan elixir'.
+Run the command with the default config file (.elixir.yml).
 
-A different config file can be loaded by specifying it in an optional argument, 'php artisan elixir --config=mytasks.yml'.
+`# php artisan elixir`
 
-## Watch for changes
+Run the command with a custom config file:
 
-You can run a watcher on any number of files and folders to automatically run elixir on changes.
+`# php artisan elixir --config=***`
 
-You can list these files or folders in the default config file using the task module 'watch'. 
+Run the folder watcher to automatically run elixir on file changes with the default config file (.elixir.yml).
 
-Run 'php artisan elixir:watch' to start up the watcher.
+`# php artisan elixir:watch`
 
-Elixir:watch also takes an optional argument to specifiy an alternative config file.
+Run the folder watcher to automatically run elixir on file changes using a custom config file:
 
-It provides some verbose when a path watcher is added or removed, and when the standard elixir task is run.
+`# php artisan elixir:watch --config=***`
 
 ## Configuration
 
@@ -222,6 +209,15 @@ revision:
         - hash_length=12&minify=true&php_manifest=true
 ```
 
+## Contributing
+
+Please see [CONTRIBUTING](https://github.com/bluora/laravel-php-elixir/blob/master/CONTRIBUTING.md) for details.
+
+## Credits
+
+* [Rocco Howard](https://github.com/therocis)
+* [All Contributors](https://github.com/bluora/laravel-php-elixir/contributors)
+
 ## License
 
-The Laravel PHP-Elixir is open-sourced software licensed under the MIT license.
+The MIT License (MIT). Please see [License File](https://github.com/bluora/laravel-php-elixir/blob/master/LICENSE) for more information.
