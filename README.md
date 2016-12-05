@@ -10,6 +10,16 @@ Provides a replacement of the Node.js based elixir pre-packaged with Laravel Fra
 
 Tasks are sequentially run in the order that they are declared in the configuration file. You can specify more than one task module block.
 
+## Pre-install requirement
+
+This package required ext-inotify.
+
+Install this php extension by running:
+
+`$ pecl install inotify`
+
+NOTE: You may need to enable this extension.
+
 ## Install
 
 Via composer:
