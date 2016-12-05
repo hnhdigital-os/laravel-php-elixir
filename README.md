@@ -14,21 +14,15 @@ Tasks are sequentially run in the order that they are declared in the configurat
 
 Via composer:
 
-`$ composer require-dev bluora/laravel-php-elixir ~1.0`
+`$ composer require-dev bluora/laravel-php-elixir ~2.0`
 
-Enable the console command by editing app/Console/Kernel.php:
+Enable the service provider by editing config/app.php:
 
 ```php
-    /**
-     * The Artisan commands provided by your application.
-     *
-     * @var array
-     */
-    protected $commands = [
-      ...
-      \PhpElixir\ElixirConsoleCommand::class,
-      \PhpElixir\ElixirWatchCommand::class,
-      ...
+    'providers' => [
+        ...
+        Bluora\PhpElixir\ServiceProvider::class,
+        ...
     ];
 ```
 
