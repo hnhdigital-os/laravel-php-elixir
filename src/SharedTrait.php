@@ -242,7 +242,7 @@ trait SharedTrait
             foreach ($paths as $path) {
                 self::storePath($path);
             }
-        } else {
+        } elseif (!empty($path)) {
             static::console()->path_check[$path] = true;
         }
     }
@@ -318,20 +318,27 @@ trait SharedTrait
             $scan_path .= '/';
         }
 
-        $contents = scandir($scan_path);
 
-        foreach ($contents as $key => $value) {
-            if ($value === '.' || $value === '..') {
-                continue;
+        try
+        {
+            $contents = scandir($scan_path);
+
+            foreach ($contents as $key => $value) {
+                if ($value === '.' || $value === '..') {
+                    continue;
+                }
+                $absolute_path = $scan_path.$value;
+                if (is_dir($absolute_path) && $depth != 0) {
+                    $new_paths = self::scan($absolute_path.'/', $include_folders, $include_files, $depth - 1);
+                    $paths = array_merge($paths, $new_paths);
+                }
+                if ((is_file($absolute_path) && $include_files) || (is_dir($absolute_path) && $include_folders)) {
+                    $paths[] = $absolute_path;
+                }
             }
-            $absolute_path = $scan_path.$value;
-            if (is_dir($absolute_path) && $depth != 0) {
-                $new_paths = self::scan($absolute_path.'/', $include_folders, $include_files, $depth - 1);
-                $paths = array_merge($paths, $new_paths);
-            }
-            if ((is_file($absolute_path) && $include_files) || (is_dir($absolute_path) && $include_folders)) {
-                $paths[] = $absolute_path;
-            }
+        } catch (\Exception $exception) {
+            static::console()->error(sprintf('Path %s %s.', $scan_path, $exception->getMessage()));
+            exit(1);
         }
 
         return $paths;
