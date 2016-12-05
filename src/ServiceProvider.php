@@ -14,15 +14,18 @@ class ServiceProvider extends BaseServiceProvider
     protected $defer = true;
 
     /**
-     * Register the service provider.
+     * Bootstrap the application services.
      *
      * @return void
      */
-    public function register()
+    public function boot()
     {
-        $this->app->singleton('Nav', function () {
-            return new Nav();
-        });
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                ElixirConsoleCommand::class,
+                ElixirWatchCommand::class,
+            ]);
+        }
     }
 
     /**
@@ -32,6 +35,6 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function provides()
     {
-        return ['Nav'];
+        return [];
     }
 }
