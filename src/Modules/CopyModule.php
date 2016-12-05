@@ -82,7 +82,7 @@ class CopyModule extends AbstractModule
             /*
              * Copying error. File may not exist.
              */
-            case self::COPY_FILE:
+            case self::COPY_ERROR:
 
                 return false;
                 break;
