@@ -37,7 +37,7 @@ class CopyModule extends AbstractModule
      */
     public static function verify($source_path, $destination_path)
     {
-        list($method, $source_path, $destination_path, $options) = self::checkPath($source_path, $destination_path);
+        list($method, $source_path, $destination_path, $options) = self::checkPath($original_source_path = $source_path, $original_destination_path = $destination_path);
 
         if (!Elixir::checkPath($source_path, false, true)) {
             return false;
@@ -82,8 +82,8 @@ class CopyModule extends AbstractModule
             /*
              * Copying error. File may not exist.
              */
-            case self::COPY_ERROR:
-
+            case self::COPY_ERROR:                
+                Elixir::console()->error(sprintf('%s not found.', $original_source_path));
                 return false;
                 break;
         }
