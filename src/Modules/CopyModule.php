@@ -10,7 +10,7 @@ class CopyModule extends AbstractModule
     /**
      * Error understanding path.
      */
-    const COPY_ERROR = 1;
+    const COPY_ERROR = -1;
 
     /**
      * Copy all files and folders.
@@ -77,6 +77,14 @@ class CopyModule extends AbstractModule
                     $destination_path .= $source_basename;
                 }
                 Elixir::storePath($destination_path);
+                break;
+
+            /*
+             * Copying error. File may not exist.
+             */
+            case self::COPY_FILE:
+
+                return false;
                 break;
         }
 
