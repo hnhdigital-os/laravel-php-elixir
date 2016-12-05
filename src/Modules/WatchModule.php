@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpElixir\Modules;
+namespace Bluora\PhpElixir\Modules;
 
-use PhpElixir\AbstractModule;
-use PhpElixir\ElixirWatchCommand as Elixir;
+use Bluora\PhpElixir\AbstractModule;
+use Bluora\PhpElixir\ElixirWatchCommand as Elixir;
 
 class WatchModule extends AbstractModule
 {

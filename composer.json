@@ -1,7 +1,7 @@
 {
     "name": "bluora/laravel-php-elixir",
     "description": "Provides a PHP based equivalent to Node.js based Elixir",
-    "keywords": ["laravel", "elixir"],
+    "keywords": ["laravel", "php", "elixir"],
     "license": "MIT",
     "authors": [
         {
@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "PhpElixir\\": "src/"
+            "Bluora\\PhpElixir\\": "src/"
         }
     },
     "scripts": {

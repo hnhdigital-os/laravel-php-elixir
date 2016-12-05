@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpElixir;
+namespace Bluora\PhpElixir;
 
 use Config;
 use Illuminate\Console\Command;

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpElixir;
+namespace Bluora\PhpElixir;
 
 abstract class AbstractModule
 {
