@@ -1,24 +1,30 @@
-# Laravel PHP-Elixir
+```
+.____                                    .__  ___________.__  .__       .__        
+|    |   _____ ____________ ___  __ ____ |  | \_   _____/|  | |__|__  __|__|______ 
+|    |   \__  \\_  __ \__  \\  \/ // __ \|  |  |    __)_ |  | |  \  \/  /  \_  __ \
+|    |___ / __ \|  | \// __ \\   /\  ___/|  |__|        \|  |_|  |>    <|  ||  | \/
+|_______ (____  /__|  (____  /\_/  \___  >____/_______  /|____/__/__/\_ \__||__|   
+        \/    \/           \/          \/             \/               \/          
+```
 
-This package has been developed by H&H|Digital, an Australian botique developer. Visit us at [hnh.digital](http://hnh.digital).
 
-[![Latest Stable Version](https://poser.pugx.org/bluora/laravel-php-elixir/v/stable.svg)](https://packagist.org/packages/bluora/laravel-php-elixir) [![Total Downloads](https://poser.pugx.org/bluora/laravel-php-elixir/downloads.svg)](https://packagist.org/packages/bluora/laravel-php-elixir) [![Latest Unstable Version](https://poser.pugx.org/bluora/laravel-php-elixir/v/unstable.svg)](https://packagist.org/packages/bluora/laravel-php-elixir) [![License](https://poser.pugx.org/bluora/laravel-php-elixir/license.svg)](https://packagist.org/packages/bluora/laravel-php-elixir)
+Provides a replacement of the Node.js based elixir pre-packaged with Laravel Framework. Tasks are sequentially run in the order that they are declared in the configuration file. You can specify more than one task module block.
+
+[![Latest Stable Version](https://poser.pugx.org/bluora/laravel-php-elixir/v/stable.svg)](https://packagist.org/packages/bluora/laravel-php-elixir) [![Total Downloads](https://poser.pugx.org/bluora/laravel-php-elixir/downloads.svg)](https://packagist.org/packages/bluora/laravel-php-elixir) [![Latest Unstable Version](https://poser.pugx.org/bluora/laravel-php-elixir/v/unstable.svg)](https://packagist.org/packages/bluora/laravel-php-elixir) [![Built for Laravel](https://img.shields.io/badge/Built_for-Laravel-green.svg)](https://laravel.com/) [![License](https://poser.pugx.org/bluora/laravel-php-elixir/license.svg)](https://packagist.org/packages/bluora/laravel-php-elixir)
 
 [![Build Status](https://travis-ci.org/bluora/laravel-php-elixir.svg?branch=master)](https://travis-ci.org/bluora/laravel-php-elixir) [![StyleCI](https://styleci.io/repos/69619219/shield?branch=master)](https://styleci.io/repos/69619219) [![Test Coverage](https://codeclimate.com/github/bluora/laravel-php-elixir/badges/coverage.svg)](https://codeclimate.com/github/bluora/laravel-php-elixir/coverage) [![Issue Count](https://codeclimate.com/github/bluora/laravel-php-elixir/badges/issue_count.svg)](https://codeclimate.com/github/bluora/laravel-php-elixir) [![Code Climate](https://codeclimate.com/github/bluora/laravel-php-elixir/badges/gpa.svg)](https://codeclimate.com/github/bluora/laravel-php-elixir) 
 
-Provides a replacement of the Node.js based elixir pre-packaged with Laravel Framework.
-
-Tasks are sequentially run in the order that they are declared in the configuration file. You can specify more than one task module block.
+This package has been developed by H&H|Digital, an Australian botique developer. Visit us at [hnh.digital](http://hnh.digital).
 
 ## Pre-install requirement
 
-This package required ext-inotify.
-
-Install this php extension by running:
+This package requires ext-inotify which can be installed by:
 
 `$ pecl install inotify`
 
-NOTE: You may need to enable this extension.
+You will likely need to enable this extension. You can use the following (may not match your specific OS settings).
+
+`$ echo "extension=inotify.so" | sudo tee /etc/php/7.1/mods-available/inotify.ini && sudo ln -s /etc/php/7.1/mods-available/inotify.ini /etc/php/7.1/cli/conf.d/20-inotify.ini`
 
 ## Install
 
@@ -36,25 +42,23 @@ Enable the service provider by editing config/app.php:
     ];
 ```
 
-You can run 'php artisan elixir' to copy the default config file to '.elixir.yml'.
-
 ## Usage
 
 Run the command with the default config file (.elixir.yml).
 
-`# php artisan elixir`
+`$ php artisan elixir`
 
 Run the command with a custom config file:
 
-`# php artisan elixir --config=***`
+`$ php artisan elixir --config=***`
 
 Run the folder watcher to automatically run elixir on file changes with the default config file (.elixir.yml).
 
-`# php artisan elixir:watch`
+`$ php artisan elixir:watch`
 
 Run the folder watcher to automatically run elixir on file changes using a custom config file:
 
-`# php artisan elixir:watch --config=***`
+`$ php artisan elixir:watch --config=***`
 
 ## Configuration
 
