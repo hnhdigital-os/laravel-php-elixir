@@ -19,5 +19,10 @@ class ServiceProvider extends BaseServiceProvider
                 ElixirWatchCommand::class,
             ]);
         }
+
+        // Publish the default config.
+        $this->publishes([
+            __DIR__.'/.elixir.yml.example' => base_path('.elixir.yml'),
+        ]);
     }
 }
