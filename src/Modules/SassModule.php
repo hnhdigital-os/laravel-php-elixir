@@ -2,9 +2,9 @@
 
 namespace Bluora\PhpElixir\Modules;
 
-use Leafo\ScssPhp\Compiler;
 use Bluora\PhpElixir\AbstractModule;
 use Bluora\PhpElixir\ElixirConsoleCommand as Elixir;
+use Leafo\ScssPhp\Compiler;
 
 class SassModule extends AbstractModule
 {

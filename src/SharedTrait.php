@@ -318,9 +318,7 @@ trait SharedTrait
             $scan_path .= '/';
         }
 
-
-        try
-        {
+        try {
             $contents = scandir($scan_path);
 
             foreach ($contents as $key => $value) {

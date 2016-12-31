@@ -82,13 +82,12 @@ class CopyModule extends AbstractModule
             /*
              * Copying error. File may not exist.
              */
-            case self::COPY_ERROR:                
+            case self::COPY_ERROR:
                 Elixir::console()->error(sprintf('%s not found.', $original_source_path));
+
                 return false;
                 break;
         }
-
-
 
         return true;
     }
