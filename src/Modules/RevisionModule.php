@@ -78,6 +78,9 @@ class RevisionModule extends AbstractModule
      * @param array  $options
      *
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.NpathComplexity)     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     private function process($source_path, $desination_folder, $manifest_file, $text_options)
     {
@@ -134,8 +137,9 @@ class RevisionModule extends AbstractModule
                     $class = '\\MatthiasMullie\\Minify\\'.strtoupper($path_info['extension']);
                     (new $class($source_file))->minify($destination_file);
                 }
+
                 // Or just copy the file.
-                else {
+                elseif (!$minify) {
                     copy($source_file, $destination_file);
                 }
             }

@@ -133,6 +133,8 @@ class ElixirWatchCommand extends Command
      * @param array $events
      *
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     private function processEvents($events)
     {

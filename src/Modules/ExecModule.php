@@ -14,6 +14,8 @@ class ExecModule extends AbstractModule
      * @param string $arguments
      *
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public static function verify($executable, $arguments)
     {
