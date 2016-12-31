@@ -16,6 +16,7 @@ class ExecModule extends AbstractModule
      * @return bool
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NpathComplexity)
      */
     public static function verify($executable, $arguments)
     {

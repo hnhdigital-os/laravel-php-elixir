@@ -79,7 +79,7 @@ class RevisionModule extends AbstractModule
      *
      * @return bool
      *
-     * @SuppressWarnings(PHPMD.NpathComplexity)     *
+     * @SuppressWarnings(PHPMD.NpathComplexity)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     private function process($source_path, $desination_folder, $manifest_file, $text_options)

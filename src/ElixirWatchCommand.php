@@ -135,6 +135,7 @@ class ElixirWatchCommand extends Command
      * @return bool
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NpathComplexity)
      */
     private function processEvents($events)
     {

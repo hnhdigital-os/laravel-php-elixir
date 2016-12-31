@@ -13,6 +13,8 @@ class WatchModule extends AbstractModule
      * @param mixed $path
      *
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function verify($index, $path)
     {
