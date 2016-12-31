@@ -14,6 +14,8 @@ class EmptyModule extends AbstractModule
      * @param string $clear_path
      *
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function verify($index, $clear_path)
     {
@@ -59,6 +61,8 @@ class EmptyModule extends AbstractModule
      * @param string $clear_path
      *
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     private function process($index, $clear_path)
     {
