@@ -107,15 +107,15 @@ class ElixirWatchCommand extends Command
                 if ($this->processEvents($events)) {
                     $bar = $this->output->createProgressBar();
                     $bar->setFormat('   [%bar%] %elapsed:6s%');
-                    $op = [];
-                    exec('nohup php artisan elixir > /dev/null 2>&1 & echo $!', $op);
-                    $pid = (int) $op[0];
+                    $output = [];
+                    exec('nohup php artisan elixir > /dev/null 2>&1 & echo $!', $output);
+                    $pid = (int) $output[0];
                     $running = true;
                     while ($running) {
                         $bar->advance();
-                        $op = [];
-                        exec('ps -p '.$pid, $op);
-                        $running = isset($op[1]);
+                        $output = [];
+                        exec('ps -p '.$pid, $output);
+                        $running = isset($output[1]);
                     }
                     $bar->finish();
                     static::console()->line('');
@@ -211,6 +211,8 @@ class ElixirWatchCommand extends Command
      * @param string $path
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     private function addPath($original_path, $options = false)
     {
