@@ -11,6 +11,8 @@ abstract class AbstractModule
      * @param mixed $parameter2
      *
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public static function verify($parameter1, $parameter2)
     {
@@ -24,6 +26,8 @@ abstract class AbstractModule
      * @param mixed $parameter2
      *
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function run($parameter1, $parameter2)
     {
