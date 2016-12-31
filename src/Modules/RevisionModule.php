@@ -124,7 +124,6 @@ class RevisionModule extends AbstractModule
             // Hashed and minified new file name.
             $destination_file = $desination_folder.'/'.$relative_folder.'/'.$path_info['filename'].'.'.$sha1.'.'.$minify_ext.$path_info['extension'];
 
-
             if (!Elixir::dryRun()) {
                 // Check that the destination folder exists.
                 $new_folder = $desination_folder.'/'.$relative_folder;
