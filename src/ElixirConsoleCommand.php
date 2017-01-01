@@ -36,6 +36,14 @@ class ElixirConsoleCommand extends Command
      */
     public function handle()
     {
+        static::console()->line("__________.__          ___________.__  .__       .__        ");
+        static::console()->line("\______   \  |__ ______\_   _____/|  | |__|__  __|__|______ ");
+        static::console()->line(" |     ___/  |  \\\\____ \\|    __)_ |  | |  \\  \\/  /  \\_  __ \\");
+        static::console()->line(" |    |   |   Y  \  |_> >        \|  |_|  |>    <|  ||  | \/");
+        static::console()->line(" |____|   |___|  /   __/_______  /|____/__/__/\_ \__||__|   ");
+        static::console()->line("               \/|__|          \/               \/          ");
+        static::console()->line('');
+
         // Check and verify the config file and system setup.
         if (!$this->verify()) {
             return 1;

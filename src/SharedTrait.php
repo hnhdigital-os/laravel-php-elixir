@@ -57,6 +57,12 @@ trait SharedTrait
      */
     protected $config_yaml_file_path = '';
 
+    public function __construct()
+    {
+        parent::__construct();
+        static::$console = $this;
+    }
+
     /**
      * Static link to this running command.
      *
@@ -74,8 +80,6 @@ trait SharedTrait
      */
     private function verify()
     {
-        static::$console = $this;
-
         if (env('APP_ENV') == 'PRODUCTION') {
             $this->error('This script does not run in production.');
 
