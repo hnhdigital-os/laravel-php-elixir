@@ -235,7 +235,9 @@ class ElixirWatchCommand extends Command
         }
 
         if (isset($options['filter'])) {
-            $options['filter'] = explode(',', $options['filter']);
+            if (!is_array($options['filter'])) {
+                $options['filter'] =  explode(',', $options['filter']);
+            }
             $options['filter_allowed'] = array_filter($options['filter'], function ($value) {
                 return substr($value, 0, 1) !== '!';
             });
