@@ -20,7 +20,7 @@ class ElixirConsoleCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'elixir {--config=}';
+    protected $signature = 'elixir {--config=} {--ignore=}';
 
     /**
      * The console command description.
@@ -36,9 +36,9 @@ class ElixirConsoleCommand extends Command
      */
     public function handle()
     {
-        static::console()->line('__________.__          ___________.__  .__       .__        ');
+        static::console()->line("__________.__          ___________.__  .__       .__        ");
         static::console()->line("\______   \  |__ ______\_   _____/|  | |__|__  __|__|______ ");
-        static::console()->line(' |     ___/  |  \\\\____ \\|    __)_ |  | |  \\  \\/  /  \\_  __ \\');
+        static::console()->line(" |     ___/  |  \\\\____ \\|    __)_ |  | |  \\  \\/  /  \\_  __ \\");
         static::console()->line(" |    |   |   Y  \  |_> >        \|  |_|  |>    <|  ||  | \/");
         static::console()->line(" |____|   |___|  /   __/_______  /|____/__/__/\_ \__||__|   ");
         static::console()->line("               \/|__|          \/               \/          ");
@@ -49,8 +49,19 @@ class ElixirConsoleCommand extends Command
             return 1;
         }
 
+        $ignore_list = [];
+        if ($this->option('ignore')) {
+            $ignore_list = explode(',', str_replace(' ', '', $this->option('ignore')));
+        }
+
         // Run each task.
         foreach ($this->tasks as $task_detail) {
+            $task = array_get($task_detail, 'task', false);
+
+            if ($task !== false && in_array($task, $ignore_list)) {
+                continue;
+            }
+
             $task_class = $task_detail['class'];
             $arguments = $task_detail['arguments'];
             (new $task_class())->run(...$arguments);

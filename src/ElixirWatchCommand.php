@@ -65,9 +65,9 @@ class ElixirWatchCommand extends Command
      */
     public function handle()
     {
-        static::console()->line('__________.__          ___________.__  .__       .__        ');
+        static::console()->line("__________.__          ___________.__  .__       .__        ");
         static::console()->line("\______   \  |__ ______\_   _____/|  | |__|__  __|__|______ ");
-        static::console()->line(' |     ___/  |  \\\\____ \\|    __)_ |  | |  \\  \\/  /  \\_  __ \\');
+        static::console()->line(" |     ___/  |  \\\\____ \\|    __)_ |  | |  \\  \\/  /  \\_  __ \\");
         static::console()->line(" |    |   |   Y  \  |_> >        \|  |_|  |>    <|  ||  | \/");
         static::console()->line(" |____|   |___|  /   __/_______  /|____/__/__/\_ \__||__|   ");
         static::console()->line("               \/|__|          \/               \/          ");
@@ -116,7 +116,7 @@ class ElixirWatchCommand extends Command
                     $bar = $this->output->createProgressBar();
                     $bar->setFormat('   [%bar%] %elapsed:6s%');
                     $output = [];
-                    exec('nohup php artisan elixir > /dev/null 2>&1 & echo $!', $output);
+                    exec('nohup php artisan elixir --ignore=empty > /dev/null 2>&1 & echo $!', $output);
                     $pid = (int) $output[0];
                     $running = true;
                     while ($running) {
@@ -236,7 +236,7 @@ class ElixirWatchCommand extends Command
 
         if (isset($options['filter'])) {
             if (!is_array($options['filter'])) {
-                $options['filter'] = explode(',', $options['filter']);
+                $options['filter'] =  explode(',', $options['filter']);
             }
             $options['filter_allowed'] = array_filter($options['filter'], function ($value) {
                 return substr($value, 0, 1) !== '!';

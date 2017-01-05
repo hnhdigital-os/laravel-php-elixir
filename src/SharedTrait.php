@@ -183,7 +183,7 @@ trait SharedTrait
                 if (!$task_class::verify($key, $settings)) {
                     return false;
                 }
-                $this->tasks[] = ['class' => $task_class, 'arguments' => [$key, $settings]];
+                $this->tasks[] = ['class' => $task_class, 'arguments' => [$key, $settings], 'task' => $task];
             }
         }
 
