@@ -64,7 +64,27 @@ Run the folder watcher to automatically run elixir on file changes using a custo
 
 Configuration for this package is done in the '.elixir.yml' located in your base directory or in the 'vendor/bluora/laravel-php-elixir/src/.elixir.yml.example'.
 
-You can list tasks using the first level in the YAML file or, if you need to declare more than one task module in different location of the config file, simply prepend the task with a number (unique to the task) and a hash.
+First declare the task name and the class name in the configuration file (these modules are installed by default).
+
+```yaml
+modules:
+    combine:
+        - Bluora\PhpElixirCombine\CombineModule
+    copy:
+        - Bluora\PhpElixirCopy\CopyModule
+    empty:
+        - Bluora\PhpElixirEmpty\EmptyModule
+    exec:
+        - Bluora\PhpElixirExec\ExecModule
+    replace:
+        - Bluora\PhpElixirReplace\ReplaceModule
+    revision:
+        - Bluora\PhpElixirRevision\RevisionModule
+    sass:
+        - Bluora\PhpElixirSass\SassModule
+```
+
+List tasks using the first level in the YAML file or, if you need to declare more than one task module in different location of the config file, simply prepend the task with a number (unique to the task) and a hash. For example:
 
 ```yaml
 copy:
