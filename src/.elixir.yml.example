@@ -1,3 +1,18 @@
+modules:
+    combine:
+        - Bluora\PhpElixirCombine\CombineModule
+    copy:
+        - Bluora\PhpElixirCopy\CopyModule
+    empty:
+        - Bluora\PhpElixirEmpty\EmptyModule
+    exec:
+        - Bluora\PhpElixirExec\ExecModule
+    replace:
+        - Bluora\PhpElixirReplace\ReplaceModule
+    revision:
+        - Bluora\PhpElixirRevision\RevisionModule
+    sass:
+        - Bluora\PhpElixirSass\SassModule
 
 options:
 
