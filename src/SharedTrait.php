@@ -119,6 +119,8 @@ trait SharedTrait
             return false;
         }
 
+        static::commandInfo('Config file being used: %s.', $this->config_yaml_file_path);
+
         // The config file has options set.
         if (isset($config['options'])) {
             $this->options = $config['options'];
@@ -137,8 +139,15 @@ trait SharedTrait
         }
         unset($config['paths']);
 
-        // The config file declares 3rd party modules.
+        $available_tasks = [];
+
+        // The config file declares modules that are available.
         if (isset($config['modules'])) {
+            foreach ($config['modules'] as $key => $value) {
+                if (array_has($value, 0) && class_exists(array_get($value, 0))) {
+                    $available_tasks[$key] = array_get($value, 0);
+                }
+            }
         }
         unset($config['modules']);
 
@@ -169,13 +178,14 @@ trait SharedTrait
                 continue;
             }
 
-            // Create the class name and check.
-            $task_class = __NAMESPACE__.'\\Modules\\'.studly_case($task).'Module';
-            if (!class_exists($task_class)) {
-                $this->error(sprintf('Module \'%s\' can not be found.', $task));
-
-                return false;
+            if (!isset($available_tasks[$task])) {
+                $this->error(sprintf('\'%s\' has been declared as a class but is missing from the modules list.', $task));
+                exit();
+                continue;
             }
+
+            // Create the class name and check.
+            $task_class = $available_tasks[$key];
 
             foreach ($entries as $key => $settings) {
                 $key = $this->parseConstants($key);
@@ -186,9 +196,6 @@ trait SharedTrait
                 $this->tasks[] = ['class' => $task_class, 'arguments' => [$key, $settings], 'task' => $task];
             }
         }
-
-        static::commandInfo('Config file being used: %s.', $this->config_yaml_file_path);
-        static::console()->line('');
 
         return true;
     }
