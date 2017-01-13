@@ -149,6 +149,7 @@ trait SharedTrait
                 }
             }
         }
+
         unset($config['modules']);
 
         $run_tasks = [];
@@ -185,11 +186,13 @@ trait SharedTrait
             }
 
             // Create the class name and check.
-            $task_class = $available_tasks[$key];
+            $task_class = $available_tasks[$task];
 
             foreach ($entries as $key => $settings) {
+
                 $key = $this->parseConstants($key);
                 $settings = $this->parseConstants($settings);
+
                 if (!$task_class::verify($key, $settings)) {
                     return false;
                 }
@@ -291,6 +294,11 @@ trait SharedTrait
             return $path;
         }
         static::console()->error(sprintf('Path %s can not be found.', $original_path));
+
+        $trace = debug_backtrace()[0];
+        if (array_has($trace, 'file')) {
+            static::console()->line(array_get($trace, 'file').':'.array_get($trace, 'line'));
+        }
 
         return false;
     }
