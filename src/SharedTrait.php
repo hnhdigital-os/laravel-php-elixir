@@ -189,7 +189,6 @@ trait SharedTrait
             $task_class = $available_tasks[$task];
 
             foreach ($entries as $key => $settings) {
-
                 $key = $this->parseConstants($key);
                 $settings = $this->parseConstants($settings);
 
