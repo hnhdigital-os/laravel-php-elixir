@@ -32,6 +32,13 @@
             "Bluora\\PhpElixir\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bluora\\PhpElixir\\ServiceProvider"
+            ]
+        }
+    },
     "scripts": {
       "test": "composer phpunit && composer phpcs",
       "phpcs": "./vendor/bin/phpcs -p -s --standard=PSR2 ./src ./tests",
